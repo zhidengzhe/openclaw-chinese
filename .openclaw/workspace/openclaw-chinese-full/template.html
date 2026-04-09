@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PAGE_TITLE}} - OpenClaw 中文文档</title>
+    <!-- 第一阶段：基础样式，第二阶段替换为官方设计 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 - 第二阶段会完全替换 */
+        body { font-family: sans-serif; margin: 0; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; 
+                        display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; 
+               font-weight: bold; color: #2563eb; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #1e293b; font-weight: 500; 
+                      padding: 8px 12px; border-radius: 6px; }
+        .nav-links a:hover { background: #2563eb; color: white; }
+        .nav-links a.active { background: #2563eb; color: white; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <nav class="navbar">
+
+        <div class="nav-container">
+            
+    <a href="/" class="logo">
+      <i class="fas fa-crab"></i>OpenClaw 中文
+    </a>
+            <ul class="nav-links">
+
+                <li><a href="/" class="active">首页</a></li>
+                <li><a href="/getting-started/">快速开始</a></li>
+                <li><a href="/installation/">安装</a></li>
+                <li><a href="/gateway/">网关与运维</a></li>
+                <li><a href="/messaging-channels/">消息渠道</a></li>
+                <li><a href="/platforms/">平台</a></li>
+                <li><a href="/tools/">工具</a></li>
+                <li><a href="/models/">模型</a></li>
+                <li><a href="/agents/">代理</a></li>
+                <li><a href="/api/">API</a></li>
+                <li><a href="/reference/">参考</a></li>
+                <li><a href="/community/">社区</a></li>
+                <li><a href="/help/">帮助</a></li>
+                <li><a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="content">
+            <h1>{{PAGE_TITLE}}</h1>
+            <p>这里是 {{PAGE_TITLE}} 页面内容...</p>
+        </div>
+    </main>
+    <script>
+        // 动态生成导航栏，确保一致性
+        const navStructure = [
+            { path: "/openclaw-chinese/", title: "首页" },
+            { path: "/openclaw-chinese/getting-started/", title: "快速开始" },
+            { path: "/openclaw-chinese/installation/", title: "安装" },
+            { path: "/openclaw-chinese/messaging-channels/", title: "消息渠道" },
+            { path: "/openclaw-chinese/agents/", title: "代理" },
+            { path: "/openclaw-chinese/tools/", title: "工具" },
+            { path: "/openclaw-chinese/models/", title: "模型" },
+            { path: "/openclaw-chinese/api/", title: "API文档" },
+            { path: "/openclaw-chinese/community/", title: "社区" },
+            { path: "https://github.com/openclaw/openclaw", title: "GitHub", external: true }
+        ];
+        
+        // 获取当前页面路径
+        const currentPath = window.location.pathname;
+        
+        // 生成导航链接
+        const navLinks = document.querySelector('.nav-links');
+        navStructure.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = item.path;
+            a.textContent = item.title;
+            
+            // 标记当前活动页面
+            if (item.path === "/openclaw-chinese/" && currentPath === "/openclaw-chinese/") {
+                a.classList.add('active');
+            } else if (item.path !== "/openclaw-chinese/" && currentPath.startsWith(item.path)) {
+                a.classList.add('active');
+            }
+            
+            if (item.external) {
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+            }
+            
+            li.appendChild(a);
+            navLinks.appendChild(li);
+        });
+    </script>
+</body>
+</html>

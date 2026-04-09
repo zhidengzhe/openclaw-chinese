@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助 - OpenClaw 中文文档</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: sans-serif; margin: 0; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; 
+                        display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; 
+               font-weight: bold; color: #2563eb; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #1e293b; font-weight: 500; 
+                      padding: 8px 12px; border-radius: 6px; }
+        .nav-links a:hover { background: #2563eb; color: white; }
+        .nav-links a.active { background: #2563eb; color: white; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <nav class="navbar">
+
+        <div class="nav-container">
+            
+    <a href="/" class="logo">
+      <i class="fas fa-crab"></i>OpenClaw 中文
+    </a>
+            <ul class="nav-links">
+
+                <li><a href="/">首页</a></li>
+                <li><a href="/getting-started/">快速开始</a></li>
+                <li><a href="/installation/">安装</a></li>
+                <li><a href="/gateway/">网关与运维</a></li>
+                <li><a href="/messaging-channels/">消息渠道</a></li>
+                <li><a href="/platforms/">平台</a></li>
+                <li><a href="/tools/">工具</a></li>
+                <li><a href="/models/">模型</a></li>
+                <li><a href="/agents/">代理</a></li>
+                <li><a href="/api/">API</a></li>
+                <li><a href="/reference/">参考</a></li>
+                <li><a href="/community/">社区</a></li>
+                <li><a href="/help/" class="active">帮助</a></li>
+                <li><a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="content">
+            <h1>帮助</h1>
+            <p>常见问题解答和故障排除指南。</p>
+            
+            <h2>常见问题</h2>
+            
+            <h3>安装问题</h3>
+            <p><strong>Q: 安装时出现权限错误？</strong></p>
+            <p>A: 尝试使用管理员权限运行：<code>sudo npm install -g openclaw@latest</code></p>
+            
+            <p><strong>Q: Node.js 版本要求？</strong></p>
+            <p>A: 需要 Node.js 22.14+ 或 24.x</p>
+            
+            <h3>运行问题</h3>
+            <p><strong>Q: 网关无法启动？</strong></p>
+            <p>A: 检查端口 18789 是否被占用：<code>netstat -ano | findstr :18789</code></p>
+            
+            <p><strong>Q: 控制面板无法访问？</strong></p>
+            <p>A: 确保网关正在运行：<code>openclaw status</code></p>
+            
+            <h3>配置问题</h3>
+            <p><strong>Q: 如何配置 API 密钥？</strong></p>
+            <p>A: 在配置文件中设置或使用环境变量：<code>OPENCLAW_API_KEY=your-key</code></p>
+            
+            <h2>故障排除</h2>
+            <ol>
+                <li>检查日志：<code>openclaw logs</code></li>
+                <li>重启服务：<code>openclaw restart</code></li>
+                <li>更新到最新版本：<code>npm update -g openclaw</code></li>
+                <li>查看官方文档或社区寻求帮助</li>
+            </ol>
+            
+            <h2>获取帮助</h2>
+            <ul>
+                <li>查看完整文档</li>
+                <li>加入 Discord 社区</li>
+                <li>在 GitHub 提交问题</li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
