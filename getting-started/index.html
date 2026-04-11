@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蹇€熷紑濮?- OpenClaw 涓枃鏂囨。</title>
+    <title>快速开始 - OpenClaw 中文文档</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -28,7 +28,7 @@
             background-color: var(--light-color);
         }
         
-        /* 瀵艰埅鏍?*/
+        /* 导航栏 */
         .navbar {
             background-color: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -82,56 +82,14 @@
             color: white;
         }
         
-        /* 鏂囨。鍐呭 */
+        /* 文档内容 */
         .doc-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 40px;
         }
         
-        /* 渚ц竟鏍?*/
-        .sidebar {
-            position: sticky;
-            top: 90px;
-            height: fit-content;
-        }
-        
-        .sidebar h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .sidebar ul {
-            list-style: none;
-        }
-        
-        .sidebar li {
-            margin-bottom: 10px;
-        }
-        
-        .sidebar a {
-            text-decoration: none;
-            color: var(--gray-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar a:hover {
-            background-color: var(--border-color);
-            color: var(--primary-color);
-        }
-        
-        .sidebar a.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        /* 涓诲唴瀹?*/
+        /* 主内容 */
         .doc-content {
             background: white;
             padding: 40px;
@@ -158,11 +116,11 @@
         
         .doc-content p {
             margin-bottom: 15px;
+            line-height: 1.8;
         }
         
         .doc-content ul, .doc-content ol {
-            margin-left: 20px;
-            margin-bottom: 20px;
+            margin: 15px 0 15px 30px;
         }
         
         .doc-content li {
@@ -187,6 +145,14 @@
             border-radius: 0 8px 8px 0;
         }
         
+        .tip {
+            background: #f0fff4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
         .warning {
             background: #fef3c7;
             border-left: 4px solid #f59e0b;
@@ -195,7 +161,26 @@
             border-radius: 0 8px 8px 0;
         }
         
-        /* 椤佃剼 */
+        .steps {
+            margin: 30px 0;
+        }
+        
+        .step {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* 页脚 */
         .footer {
             background: var(--dark-color);
             color: white;
@@ -232,16 +217,8 @@
             margin-top: 20px;
         }
         
-        /* 鍝嶅簲寮?*/
+        /* 响应式 */
         @media (max-width: 768px) {
-            .doc-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: static;
-            }
-            
             .nav-container {
                 flex-direction: column;
                 height: auto;
@@ -259,20 +236,29 @@
                 display: block;
                 text-align: center;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .doc-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 瀵艰埅鏍?-->
+    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">
+            <a href="/openclaw-chinese/" class="logo">
                 <i class="fas fa-crab"></i>
-                OpenClaw 涓枃
+                OpenClaw 中文
             </a>
-                                    <ul class="nav-links">
+            <ul class="nav-links">
                 <li><a href="/openclaw-chinese/">首页</a></li>
-                <li><a href="/openclaw-chinese/getting-started/">快速开始</a></li>
+                <li><a href="/openclaw-chinese/getting-started/" class="active">快速开始</a></li>
                 <li><a href="/openclaw-chinese/installation/">安装</a></li>
                 <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
                 <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
@@ -287,122 +273,140 @@
         </div>
     </nav>
 
-    <!-- 鏂囨。鍐呭 -->
+    <!-- 文档内容 -->
     <div class="doc-container">
-        <!-- 渚ц竟鏍?-->
-        <aside class="sidebar">
-            <h3>鏂囨。鐩綍</h3>
-            <ul>
-                <li><a href="#introduction" class="active">浠嬬粛</a></li>
-                <li><a href="#what-is-openclaw">浠€涔堟槸 OpenClaw</a></li>
-                <li><a href="#core-concepts">鏍稿績姒傚康</a></li>
-                <li><a href="#installation">瀹夎姝ラ</a></li>
-                <li><a href="#first-run">棣栨杩愯</a></li>
-                <li><a href="#next-steps">涓嬩竴姝?/a></li>
-            </ul>
-        </aside>
-
-        <!-- 涓诲唴瀹?-->
         <main class="doc-content">
-            <h1>蹇€熷紑濮嬫寚鍗?/h1>
+            <h1>快速开始</h1>
             
-            <section id="introduction">
-                <h2>浠嬬粛</h2>
-                <p>娆㈣繋浣跨敤 OpenClaw锛佹湰鎸囧崡灏嗗府鍔╂偍蹇€熶笂鎵嬭繖涓己澶х殑涓汉 AI 鍔╂墜銆?/p>
-                <p>OpenClaw 鏄竴涓紑婧愮殑涓汉 AI 鍔╂墜骞冲彴锛屽彲浠ヨ鎮ㄩ€氳繃 WhatsApp銆乀elegram銆丏iscord 绛夎亰澶╁簲鐢ㄤ笌 AI 鍔╂墜浜や簰锛屽苟鎵ц鍚勭浠诲姟銆?/p>
-            </section>
+            <p>安装 OpenClaw，运行初始化设置，并与您的 AI 助手聊天 — 整个过程大约只需 5 分钟。结束时，您将拥有一个运行的网关、配置好的身份验证和一个正常工作的聊天会话。</p>
             
-            <section id="what-is-openclaw">
-                <h2>浠€涔堟槸 OpenClaw</h2>
-                <p>OpenClaw 鏄竴涓繍琛屽湪鎮ㄨ嚜宸辫澶囦笂鐨?AI 鍔╂墜缃戝叧锛屽畠锛?/p>
-                <ul>
-                    <li><strong>24/7 杩愯</strong>锛氬叏澶╁€欏緟鍛斤紝闅忔椂鍝嶅簲鎮ㄧ殑闇€姹?/li>
-                    <li><strong>澶氬钩鍙版敮鎸?/strong>锛氶€氳繃鎮ㄥ凡缁忎娇鐢ㄧ殑鑱婂ぉ搴旂敤浜や簰</li>
-                    <li><strong>鏈湴浼樺厛</strong>锛氭暟鎹瓨鍌ㄥ湪鎮ㄧ殑璁惧涓婏紝淇濇姢闅愮</li>
-                    <li><strong>鍙墿灞?/strong>锛氭敮鎸佽嚜瀹氫箟鎶€鑳藉拰鎻掍欢</li>
-                    <li><strong>寮€婧?/strong>锛氬畬鍏ㄥ紑婧愶紝绀惧尯椹卞姩</li>
-                </ul>
-            </section>
+            <div class="note">
+                <p><strong>文档反馈</strong></p>
+                <p>如果您在本页面遇到不正确、过时或令人困惑的文档，请通过以下方式提交反馈：</p>
+                <p>POST 请求到：https://docs.openclaw.ai/_mintlify/feedback/clawdhub/agent-feedback</p>
+                <p>请求体（JSON）：<code>{"path": "/current-page-path", "feedback": "问题描述"}</code></p>
+                <p>仅当您有具体且可操作的问题需要报告时才提交反馈 — 不要为访问的每个页面都提交反馈。</p>
+            </div>
             
-            <section id="core-concepts">
-                <h2>鏍稿績姒傚康</h2>
-                
-                <h3>缃戝叧 (Gateway)</h3>
-                <p>OpenClaw 鐨勬牳蹇冪粍浠讹紝璐熻矗澶勭悊鎵€鏈夋秷鎭矾鐢便€佷細璇濈鐞嗗拰鎻掍欢鍔犺浇銆?/p>
-                
-                <h3>鑺傜偣 (Nodes)</h3>
-                <p>杩炴帴鍒扮綉鍏崇殑璁惧锛屽彲浠ユ槸鎮ㄧ殑鎵嬫満銆佺數鑴戞垨鍏朵粬璁惧銆?/p>
-                
-                <h3>鎶€鑳?(Skills)</h3>
-                <p>AI 鍔╂墜鍙互鎵ц鐨勪换鍔℃ā鍧楋紝濡傚彂閫侀偖浠躲€佺鐞嗘棩鍘嗙瓑銆?/p>
-                
-                <h3>鎻掍欢 (Plugins)</h3>
-                <p>鎵╁睍 OpenClaw 鍔熻兘鐨勬ā鍧楋紝濡傛敮鎸佹柊鐨勮亰澶╁钩鍙般€?/p>
-            </section>
+            <h2>您需要什么</h2>
             
-            <section id="installation">
-                <h2>瀹夎姝ラ</h2>
-                
-                <h3>1. 瀹夎 Node.js</h3>
-                <p>OpenClaw 闇€瑕?Node.js 18 鎴栨洿楂樼増鏈€傚鏋滃皻鏈畨瑁咃紝璇疯闂?<a href="https://nodejs.org/" target="_blank">Node.js 瀹樼綉</a> 涓嬭浇瀹夎銆?/p>
-                
-                <h3>2. 瀹夎 OpenClaw</h3>
-                <div class="code-block">
-                    npm install -g openclaw@latest
+            <ul>
+                <li><strong>Node.js</strong> — 推荐 Node 24（也支持 Node 22.14+）</li>
+                <li><strong>API 密钥</strong> — 来自模型提供商（Anthropic、OpenAI、Google 等）— 初始化设置时会提示您</li>
+            </ul>
+            
+            <div class="tip">
+                <p><strong>提示</strong></p>
+                <p>使用 <code>node --version</code> 检查您的 Node 版本。</p>
+                <p><strong>Windows 用户：</strong>支持原生 Windows 和 WSL2。WSL2 更稳定，推荐用于完整体验。请参阅 <a href="/openclaw-chinese/platforms/">Windows 平台</a>。</p>
+                <p>需要安装 Node？请参阅 <a href="/openclaw-chinese/installation/">Node 安装指南</a>。</p>
+            </div>
+            
+            <h2>快速安装</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">步骤 1：安装 OpenClaw</div>
+                    
+                    <h3>macOS / Linux</h3>
+                    <div class="code-block">
+curl -fsSL https://openclaw.ai/install.sh | bash
+                    </div>
+                    
+                    <h3>Windows (PowerShell)</h3>
+                    <div class="code-block">
+iwr -useb https://openclaw.ai/install.ps1 | iex
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>注意</strong></p>
+                        <p>其他安装方法（npm、Docker 等）请参阅完整的 <a href="/openclaw-chinese/installation/">安装指南</a>。</p>
+                    </div>
                 </div>
                 
-                <h3>3. 杩愯寮曞璁剧疆</h3>
-                <div class="code-block">
-                    openclaw onboard --install-daemon
+                <div class="step">
+                    <div class="step-title">步骤 2：运行初始化设置</div>
+                    
+                    <div class="code-block">
+# 运行初始化向导
+openclaw onboard
+                    </div>
+                    
+                    <p>初始化向导将：</p>
+                    <ul>
+                        <li>引导您完成基本配置</li>
+                        <li>提示您输入 API 密钥</li>
+                        <li>设置默认模型</li>
+                        <li>配置网关服务</li>
+                    </ul>
                 </div>
                 
-                <div class="note">
-                    <p><strong>娉ㄦ剰锛?/strong>寮曞璁剧疆浼氬府鍔╂偍閰嶇疆 OpenClaw锛屽寘鎷畨瑁呭畧鎶よ繘绋嬪拰鍩烘湰閰嶇疆銆?/p>
+                <div class="step">
+                    <div class="step-title">步骤 3：启动网关</div>
+                    
+                    <div class="code-block">
+# 启动网关服务
+openclaw gateway start
+                    </div>
+                    
+                    <p>或者手动运行：</p>
+                    <div class="code-block">
+# 手动运行网关（开发模式）
+openclaw gateway
+                    </div>
                 </div>
-            </section>
+                
+                <div class="step">
+                    <div class="step-title">步骤 4：开始聊天</div>
+                    
+                    <div class="code-block">
+# 启动聊天会话
+openclaw chat
+                    </div>
+                    
+                    <p>您现在可以与您的 OpenClaw 助手聊天了！</p>
+                </div>
+            </div>
             
-            <section id="first-run">
-                <h2>棣栨杩愯</h2>
-                
-                <h3>1. 鍚姩缃戝叧</h3>
-                <div class="code-block">
-                    openclaw gateway --port 18789
-                </div>
-                
-                <h3>2. 璁块棶鎺у埗鐣岄潰</h3>
-                <p>鎵撳紑娴忚鍣紝璁块棶锛?/p>
-                <div class="code-block">
-                    http://127.0.0.1:18789/
-                </div>
-                
-                <h3>3. 杩炴帴鑱婂ぉ搴旂敤</h3>
-                <p>鍦ㄦ帶鍒剁晫闈腑锛屾寜鐓ф寚寮曡繛鎺ユ偍鐨?WhatsApp銆乀elegram 鎴栧叾浠栬亰澶╁簲鐢ㄣ€?/p>
-                
-                <div class="warning">
-                    <p><strong>璀﹀憡锛?/strong>棣栨杩炴帴鍙兘闇€瑕佷竴浜涢厤缃楠わ紝璇疯€愬績鎸夌収鐣岄潰鎸囧紩鎿嶄綔銆?/p>
-                </div>
-            </section>
+            <h2>下一步</h2>
             
-            <section id="next-steps">
-                <h2>涓嬩竴姝?/h2>
-                <p>鐜板湪鎮ㄥ凡缁忔垚鍔熷畨瑁呭苟杩愯浜?OpenClaw锛佹帴涓嬫潵鍙互锛?/p>
-                <ul>
-                    <li>鏌ョ湅 <a href="/docs/installation">瀹夎鎸囧崡</a> 鑾峰彇鏇磋缁嗙殑瀹夎璇存槑</li>
-                    <li>瀛︿範 <a href="/docs/configuration">閰嶇疆鎸囧崡</a> 鑷畾涔夋偍鐨?OpenClaw</li>
-                    <li>鎺㈢储 <a href="/docs/api">API 鏂囨。</a> 浜嗚В楂樼骇鍔熻兘</li>
-                    <li>鍔犲叆 <a href="https://discord.com/invite/clawd" target="_blank">Discord 绀惧尯</a> 鑾峰彇甯姪鍜屼氦娴?/li>
-                </ul>
-            </section>
+            <ul>
+                <li><strong>连接消息渠道</strong> — 设置 WhatsApp、Telegram 或 Discord 集成</li>
+                <li><strong>探索技能</strong> — 安装天气、日历、电子邮件等技能</li>
+                <li><strong>自定义配置</strong> — 调整设置以满足您的需求</li>
+                <li><strong>加入社区</strong> — 获取帮助并分享您的体验</li>
+            </ul>
+            
+            <div class="tip">
+                <p><strong>故障排除</strong></p>
+                <p>如果遇到问题：</p>
+                <ol>
+                    <li>检查网关是否运行：<code>openclaw gateway status</code></li>
+                    <li>查看日志：<code>openclaw logs</code></li>
+                    <li>验证 API 密钥配置</li>
+                    <li>访问 <a href="/openclaw-chinese/help/">帮助页面</a> 获取常见问题解答</li>
+                </ol>
+            </div>
+            
+            <h2>需要帮助？</h2>
+            
+            <p>如果您在快速开始过程中遇到困难：</p>
+            <ul>
+                <li>查看详细的 <a href="/openclaw-chinese/installation/">安装指南</a></li>
+                <li>访问 <a href="/openclaw-chinese/help/">帮助中心</a></li>
+                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">Discord 社区</a></li>
+                <li>在 <a href="https://github.com/openclaw/openclaw/issues" target="_blank">GitHub Issues</a> 中报告问题</li>
+            </ul>
         </main>
     </div>
 
-    <!-- 椤佃剼 -->
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="footer-content">
-            <h3>OpenClaw 涓枃鏂囨。</h3>
-            <p>涓轰腑鏂囩敤鎴锋彁渚涘畬鏁寸殑 OpenClaw 浣跨敤鎸囧崡鍜屾枃妗?/p>
+            <h3>OpenClaw 中文文档</h3>
+            <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
             
-                        <div class="footer-links">
+            <div class="footer-links">
                 <a href="/openclaw-chinese/">首页</a>
                 <a href="/openclaw-chinese/getting-started/">快速开始</a>
                 <a href="/openclaw-chinese/installation/">安装</a>
@@ -418,20 +422,22 @@
             </div>
             
             <div class="copyright">
-                <p>漏 2026 OpenClaw 涓枃鐗? 鍩轰簬 <a href="https://openclaw.ai" target="_blank">OpenClaw 瀹樼綉</a> 鍒涘缓.</p>
-                <p>缈昏瘧鍜岀淮鎶わ細鏅烘収鑰?| 鎵樼浜?GitHub Pages</p>
+                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
+                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
+                <p>最后更新：2026-04-11</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // 绠€鍗曠殑瀵艰埅鍜屼晶杈规爮婵€娲?        document.addEventListener('DOMContentLoaded', function() {
-            // 瀵艰埅鏍忔縺娲?            const currentPath = window.location.pathname;
+        // 导航栏激活
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll('.nav-links a');
             
             navLinks.forEach(link => {
                 const href = link.getAttribute('href');
-                // 鍙鐞嗗唴閮ㄩ摼鎺?                if (href && !href.startsWith('http')) {
+                if (href && !href.startsWith('http')) {
                     if (currentPath === href || 
                         (href === '/openclaw-chinese/getting-started/' && currentPath.includes('/getting-started'))) {
                         link.classList.add('active');
@@ -440,32 +446,6 @@
                     }
                 }
             });
-            
-            // 渚ц竟鏍忔粴鍔ㄦ縺娲?            const sections = document.querySelectorAll('section');
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
-            
-            function updateSidebarActive() {
-                let currentSection = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= sectionTop - 100) {
-                        currentSection = section.id;
-                    }
-                });
-                
-                sidebarLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSection}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', updateSidebarActive);
-            updateSidebarActive();
         });
     </script>
 </body>
