@@ -1,96 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- Version: 2026-04-07-12-16 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw — 个人AI助手</title>
-    <meta name="description" content="真正能做事的人工智能。清理收件箱、发送邮件、管理日历、办理登机手续。一切都可以通过 WhatsApp、Telegram 或您已使用的任何聊天应用完成。">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" href="/assets/favicon.ico">
+    <title>OpenClaw 中文文档</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 简化样式 - 确保横向导航栏 */
+        body { font-family: sans-serif; margin: 0; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; 
+                        display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; 
+               font-weight: bold; color: #2563eb; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #1e293b; font-weight: 500; 
+                      padding: 8px 12px; border-radius: 6px; }
+        .nav-links a:hover { background: #2563eb; color: white; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+               color: white; border-radius: 20px; margin-bottom: 60px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="/">OpenClaw 🦞</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/">首页</a></li>
-                <li><a href="/docs/getting-started">文档</a></li>
-                <li><a href="/docs/installation">安装</a></li>
-                <li><a href="/docs/configuration">配置</a></li>
-                <li><a href="/docs/api">API</a></li>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/openclaw-chinese/" class="logo"><i class="fas fa-crab"></i>OpenClaw 中文</a>
+                                    <ul class="nav-links">
+                <li><a href="/openclaw-chinese/">首页</a></li>
+                <li><a href="/openclaw-chinese/getting-started/">快速开始</a></li>
+                <li><a href="/openclaw-chinese/installation/">安装</a></li>
+                <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
+                <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
+                <li><a href="/openclaw-chinese/platforms/">平台</a></li>
+                <li><a href="/openclaw-chinese/tools/">工具</a></li>
+                <li><a href="/openclaw-chinese/models/">模型</a></li>
+                <li><a href="/openclaw-chinese/api/">API</a></li>
+                <li><a href="/openclaw-chinese/community/">社区</a></li>
+                <li><a href="/openclaw-chinese/help/">帮助</a></li>
                 <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
             </ul>
-        </nav>
-    </header>
-
-    <main>
-        <h1>OpenClaw 🦞</h1>
-<blockquote>
-<p>&quot;去壳！去壳！&quot; — 大概是一只太空龙虾说的</p>
-</blockquote>
-<p><strong>适用于任何操作系统的 AI 智能体网关，支持 WhatsApp、Telegram、Discord、iMessage 等。</strong></p>
-<p>发送消息，随时随地获取智能体响应。通过插件可添加 Mattermost 等更多渠道。</p>
-<h2>快速开始</h2>
-<h3>安装 OpenClaw</h3>
-<pre><code class="language-bash">npm install -g openclaw@latest
-</code></pre>
-<h3>运行引导设置</h3>
-<pre><code class="language-bash">openclaw onboard --install-daemon
-</code></pre>
-<h3>启动网关</h3>
-<pre><code class="language-bash">openclaw gateway --port 18789
-</code></pre>
-<h2>核心功能</h2>
-<ul>
-<li><strong>多渠道网关</strong>：通过单个网关进程连接 WhatsApp、Telegram、Discord 和 iMessage</li>
-<li><strong>插件渠道</strong>：通过扩展包添加 Mattermost 等更多渠道</li>
-<li><strong>多智能体路由</strong>：按智能体、工作区或发送者隔离会话</li>
-<li><strong>媒体支持</strong>：发送和接收图片、音频和文档</li>
-<li><strong>Web 控制界面</strong>：浏览器仪表板，用于聊天、配置、会话和节点管理</li>
-<li><strong>移动节点</strong>：配对 iOS 和 Android 节点，支持 Canvas</li>
-</ul>
-<h2>工作原理</h2>
-<p>OpenClaw 通过单个网关进程将聊天应用连接到 Pi 等编程智能体。它为 OpenClaw 助手提供支持，并支持本地或远程部署。</p>
-<p>网关是会话、路由和渠道连接的唯一事实来源。</p>
-<h2>仪表板</h2>
-<p>网关启动后，打开浏览器控制界面。</p>
-<ul>
-<li>本地默认地址：http://127.0.0.1:18789/</li>
-<li>远程访问：Web 界面和 Tailscale</li>
-</ul>
-<h2>从这里开始</h2>
-<ul>
-<li><a href="/docs/getting-started">快速开始指南</a></li>
-<li><a href="/docs/installation">安装说明</a></li>
-<li><a href="/docs/configuration">配置指南</a></li>
-<li><a href="/docs/api">API 文档</a></li>
-</ul>
-<h2>社区评价</h2>
-<blockquote>
-<p>&quot;Setup @openclaw by @steipete yesterday. All I have to say is, wow...&quot;
-— @jonahships_</p>
-</blockquote>
-<blockquote>
-<p>&quot;Tried Claw by @steipete. I tried to build my own AI assistant bots before, and I am very impressed how many hard things Claw gets right.&quot;
-— @AryehDubois</p>
-</blockquote>
-<blockquote>
-<p>&quot;I've been saying for like six months that even if LLMs suddenly stopped improving, we could spend <em>years</em> discovering new transformative uses.&quot;
-— @markjaquith</p>
-</blockquote>
-
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>© Invalid Date OpenClaw 中文版. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a>创建.</p>
-            <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
-            <p>最后同步时间：Invalid Date 北京时间</p>
         </div>
-    </footer>
-
-    <script src="/js/main.js"></script>
+    </nav>
+    <main class="container">
+        <section class="hero">
+            <h1>OpenClaw 🦞</h1>
+            <p>真正能做事的人工智能助手。清理收件箱、发送邮件、管理日历、办理登机手续。</p>
+            <a href="/openclaw-chinese/getting-started/" style="display:inline-block; background:white; color:#2563eb; 
+               padding:15px 30px; border-radius:50px; text-decoration:none; font-weight:bold;">开始使用</a>
+        </section>
+        <section class="features">
+            <div class="feature-card"><h3>智能助手</h3><p>24/7 全天候运行的 AI 助手</p></div>
+            <div class="feature-card"><h3>多平台支持</h3><p>通过 WhatsApp、Telegram 等交互</p></div>
+            <div class="feature-card"><h3>开源可扩展</h3><p>完全开源，支持自定义技能</p></div>
+        </section>
+    </main>
 </body>
 </html>

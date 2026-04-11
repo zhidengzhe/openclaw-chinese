@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API - OpenClaw 中文文档</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 文档内容 */
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar a {
+            text-decoration: none;
+            color: var(--gray-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--border-color);
+            color: var(--primary-color);
+        }
+        
+        .sidebar a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 主内容 */
+        .doc-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .doc-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .doc-content h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--dark-color);
+        }
+        
+        .doc-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+        
+        .doc-content p {
+            margin-bottom: 15px;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: var(--dark-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .endpoint {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .endpoint-method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .method-get { background: #10b981; color: white; }
+        .method-post { background: #3b82f6; color: white; }
+        .method-put { background: #f59e0b; color: white; }
+        .method-delete { background: #ef4444; color: white; }
+        
+        .endpoint-path {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .param-table th, .param-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .param-table th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        .param-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .note {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .doc-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                text-align: center;
+            }
+            
+            .param-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-crab"></i>
+                OpenClaw 中文
+            </a>
+                                    <ul class="nav-links">
+                <li><a href="/openclaw-chinese/">首页</a></li>
+                <li><a href="/openclaw-chinese/getting-started/">快速开始</a></li>
+                <li><a href="/openclaw-chinese/installation/">安装</a></li>
+                <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
+                <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
+                <li><a href="/openclaw-chinese/platforms/">平台</a></li>
+                <li><a href="/openclaw-chinese/tools/">工具</a></li>
+                <li><a href="/openclaw-chinese/models/">模型</a></li>
+                <li><a href="/openclaw-chinese/api/">API</a></li>
+                <li><a href="/openclaw-chinese/community/">社区</a></li>
+                <li><a href="/openclaw-chinese/help/">帮助</a></li>
+                <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 文档内容 -->
+    <div class="doc-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <h3>API 文档</h3>
+            <ul>
+                <li><a href="#api-overview" class="active">API 概述</a></li>
+                <li><a href="#authentication">认证</a></li>
+                <li><a href="#messages-api">消息 API</a></li>
+                <li><a href="#sessions-api">会话 API</a></li>
+                <li><a href="#agents-api">智能体 API</a></li>
+                <li><a href="#channels-api">渠道 API</a></li>
+                <li><a href="#webhooks">Webhooks</a></li>
+                <li><a href="#error-handling">错误处理</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容 -->
+        <main class="doc-content">
+            <h1>API 文档</h1>
+            
+            <section id="api-overview">
+                <h2>API 概述</h2>
+                <p>OpenClaw 提供完整的 REST API，允许您通过编程方式与 AI 助手交互、管理会话和配置。</p>
+                
+                <h3>基础 URL</h3>
+                <div class="code-block">
+                    http://localhost:18789/api/v1
+                </div>
+                
+                <h3>API 特性</h3>
+                <ul>
+                    <li><strong>RESTful 设计</strong>: 标准的 REST API 设计</li>
+                    <li><strong>JSON 格式</strong>: 所有请求和响应都使用 JSON</li>
+                    <li><strong>身份验证</strong>: 支持 JWT 和 API 密钥</li>
+                    <li><strong>实时更新</strong>: 支持 WebSocket 和 Server-Sent Events</li>
+                    <li><strong>OpenAPI 规范</strong>: 完整的 OpenAPI 3.0 文档</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>提示：</strong>您可以在 <code>http://localhost:18789/api-docs</code> 查看交互式 API 文档。</p>
+                </div>
+            </section>
+            
+            <section id="authentication">
+                <h2>认证</h2>
+                
+                <h3>API 密钥认证</h3>
+                <p>在请求头中添加 API 密钥：</p>
+                <div class="code-block">
+                    Authorization: Bearer your-api-key-here
+                </div>
+                
+                <h3>JWT 认证</h3>
+                <p>获取 JWT 令牌：</p>
+                <div class="code-block">
+POST /api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "your-password"
+}
+                </div>
+                
+                <p>使用 JWT 令牌：</p>
+                <div class="code-block">
+                    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                </div>
+                
+                <h3>生成 API 密钥</h3>
+                <div class="code-block">
+POST /api/v1/auth/api-keys
+Authorization: Bearer {jwt-token}
+Content-Type: application/json
+
+{
+  "name": "My API Key",
+  "expiresIn": "30d"
+}
+                </div>
+            </section>
+            
+            <section id="messages-api">
+                <h2>消息 API</h2>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-post">POST</span>
+                    <span class="endpoint-path">/api/v1/messages</span>
+                    <p>发送消息给 AI 助手</p>
+                </div>
+                
+                <h3>请求示例</h3>
+                <div class="code-block">
+POST /api/v1/messages
+Authorization: Bearer {api-key}
+Content-Type: application/json
+
+{
+  "content": "你好，今天天气怎么样？",
+  "sessionId": "optional-session-id",
+  "channel": "telegram",
+  "metadata": {
+    "userId": "user-123",
+    "userName": "张三"
+  }
+}
+                </div>
+                
+                <h3>响应示例</h3>
+                <div class="code-block">
+{
+  "id": "msg_abc123",
+  "content": "今天天气晴朗，气温25°C，适合外出。",
+  "role": "assistant",
+  "sessionId": "sess_xyz789",
+  "timestamp": "2026-04-06T10:30:00Z",
+  "metadata": {
+    "model": "deepseek/deepseek-chat",
+    "tokensUsed": 42
+  }
+}
+                </div>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/v1/messages</span>
+                    <p>获取消息历史</p>
+                </div>
+                
+                <h3>查询参数</h3>
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>类型</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>sessionId</code></td>
+                            <td>string</td>
+                            <td>过滤特定会话的消息</td>
+                        </tr>
+                        <tr>
+                            <td><code>limit</code></td>
+                            <td>number</td>
+                            <td>返回的消息数量 (默认: 50)</td>
+                        </tr>
+                        <tr>
+                            <td><code>before</code></td>
+                            <td>string</td>
+                            <td>获取此时间之前的消息 (ISO 8601)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section id="sessions-api">
+                <h2>会话 API</h2>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/v1/sessions</span>
+                    <p>获取所有会话</p>
+                </div>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-post">POST</span>
+                    <span class="endpoint-path">/api/v1/sessions</span>
+                    <p>创建新会话</p>
+                </div>
+                
+                <h3>创建会话请求</h3>
+                <div class="code-block">
+POST /api/v1/sessions
+Authorization: Bearer {api-key}
+Content-Type: application/json
+
+{
+  "name": "客户支持会话",
+  "metadata": {
+    "customerId": "cust_123",
+    "priority": "high"
+  },
+  "agentConfig": {
+    "model": "deepseek/deepseek-chat",
+    "temperature": 0.7
+  }
+}
+                </div>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/v1/sessions/{sessionId}</span>
+                    <p>获取特定会话</p>
+                </div>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-delete">DELETE</span>
+                    <span class="endpoint-path">/api/v1/sessions/{sessionId}</span>
+                    <p>删除会话</p>
+                </div>
+            </section>
+            
+            <section id="agents-api">
+                <h2>智能体 API</h2>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-path">/api/v1/agents</span>
+                    <p>获取所有智能体</p>
+                </div>
+                
+                <div class="endpoint">
+                    <span class="endpoint-method method-post">POST</span>
+                    <span class="endpoint-path">/api/v1/agents</span>
+                    <p>创建新智能体</p>
+                </div>
+                
+                <h3>创建智能体请求</h3>
+                <div class="code-block">
+POST /api/v1/agents
+Authorization: Bearer {api-key}
+Content-Type: application/json
+
+{
+  "name": "客服助手",
+  "description": "处理客户咨询的智能体",
+  "model": "deepseek/deepseek-chat",
+  "temperature": 0.7,
+  "systemPrompt": "你是一个专业的客服助手，请
