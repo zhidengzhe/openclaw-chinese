@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安装 - OpenClaw 中文文档</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 文档内容 */
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar a {
+            text-decoration: none;
+            color: var(--gray-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--border-color);
+            color: var(--primary-color);
+        }
+        
+        .sidebar a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 主内容 */
+        .doc-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .doc-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .doc-content h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--dark-color);
+        }
+        
+        .doc-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+        
+        .doc-content p {
+            margin-bottom: 15px;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: var(--dark-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .platform-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .platform-tab {
+            padding: 10px 20px;
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .platform-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .platform-content {
+            display: none;
+        }
+        
+        .platform-content.active {
+            display: block;
+        }
+        
+        .note {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .doc-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                text-align: center;
+            }
+            
+            .platform-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/openclaw-chinese/" class="logo">
+                <i class="fas fa-crab"></i>
+                OpenClaw 中文
+            </a>
+                                    <ul class="nav-links">
+                <li><a href="/openclaw-chinese/">首页</a></li>
+                <li><a href="/openclaw-chinese/getting-started/">快速开始</a></li>
+                <li><a href="/openclaw-chinese/installation/">安装</a></li>
+                <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
+                <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
+                <li><a href="/openclaw-chinese/platforms/">平台</a></li>
+                <li><a href="/openclaw-chinese/tools/">工具</a></li>
+                <li><a href="/openclaw-chinese/models/">模型</a></li>
+                <li><a href="/openclaw-chinese/api/">API</a></li>
+                <li><a href="/openclaw-chinese/community/">社区</a></li>
+                <li><a href="/openclaw-chinese/help/">帮助</a></li>
+                <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 文档内容 -->
+    <div class="doc-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <h3>安装指南</h3>
+            <ul>
+                <li><a href="#prerequisites" class="active">系统要求</a></li>
+                <li><a href="#windows-install">Windows 安装</a></li>
+                <li><a href="#macos-install">macOS 安装</a></li>
+                <li><a href="#linux-install">Linux 安装</a></li>
+                <li><a href="#docker-install">Docker 安装</a></li>
+                <li><a href="#verification">验证安装</a></li>
+                <li><a href="#troubleshooting">故障排除</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容 -->
+        <main class="doc-content">
+            <h1>安装指南</h1>
+            
+            <section id="prerequisites">
+                <h2>系统要求</h2>
+                <p>在安装 OpenClaw 之前，请确保您的系统满足以下要求：</p>
+                
+                <h3>基本要求</h3>
+                <ul>
+                    <li><strong>Node.js</strong>: 版本 18 或更高</li>
+                    <li><strong>npm</strong>: 版本 8 或更高</li>
+                    <li><strong>操作系统</strong>: Windows 10+, macOS 10.15+, Linux (Ubuntu 20.04+, Fedora 34+, 等)</li>
+                    <li><strong>内存</strong>: 至少 4GB RAM</li>
+                    <li><strong>存储空间</strong>: 至少 2GB 可用空间</li>
+                </ul>
+                
+                <h3>可选依赖</h3>
+                <ul>
+                    <li><strong>Docker</strong>: 用于容器化部署</li>
+                    <li><strong>Git</strong>: 用于从源码安装</li>
+                    <li><strong>Python 3</strong>: 某些技能可能需要</li>
+                </ul>
+            </section>
+            
+            <section id="windows-install">
+                <h2>Windows 安装</h2>
+                
+                <h3>1. 安装 Node.js</h3>
+                <p>访问 <a href="https://nodejs.org/" target="_blank">Node.js 官网</a> 下载 Windows 安装包，选择 LTS 版本。</p>
+                
+                <h3>2. 安装 OpenClaw</h3>
+                <p>打开 PowerShell 或命令提示符，运行：</p>
+                <div class="code-block">
+                    npm install -g openclaw@latest
+                </div>
+                
+                <h3>3. 验证安装</h3>
+                <div class="code-block">
+                    openclaw --version
+                </div>
+                <p>应该显示 OpenClaw 的版本号。</p>
+                
+                <div class="note">
+                    <p><strong>注意：</strong>如果遇到权限问题，可以尝试以管理员身份运行 PowerShell。</p>
+                </div>
+            </section>
+            
+            <section id="macos-install">
+                <h2>macOS 安装</h2>
+                
+                <h3>1. 安装 Homebrew (可选)</h3>
+                <div class="code-block">
+                    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                </div>
+                
+                <h3>2. 安装 Node.js</h3>
+                <p>使用 Homebrew 安装：</p>
+                <div class="code-block">
+                    brew install node
+                </div>
+                <p>或从官网下载安装包。</p>
+                
+                <h3>3. 安装 OpenClaw</h3>
+                <div class="code-block">
+                    npm install -g openclaw@latest
+                </div>
+            </section>
+            
+            <section id="linux-install">
+                <h2>Linux 安装</h2>
+                
+                <h3>Ubuntu/Debian</h3>
+                <div class="code-block">
+                    # 安装 Node.js
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+                    sudo apt-get install -y nodejs
+                    
+                    # 安装 OpenClaw
+                    sudo npm install -g openclaw@latest
+                </div>
+                
+                <h3>Fedora/RHEL</h3>
+                <div class="code-block">
+                    # 安装 Node.js
+                    curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+                    sudo dnf install -y nodejs
+                    
+                    # 安装 OpenClaw
+                    sudo npm install -g openclaw@latest
+                </div>
+            </section>
+            
+            <section id="docker-install">
+                <h2>Docker 安装</h2>
+                
+                <h3>1. 安装 Docker</h3>
+                <p>参考 <a href="https://docs.docker.com/get-docker/" target="_blank">Docker 官方文档</a> 安装 Docker。</p>
+                
+                <h3>2. 运行 OpenClaw 容器</h3>
+                <div class="code-block">
+                    docker run -d \
+                      --name openclaw \
+                      -p 18789:18789 \
+                      -v openclaw-data:/data \
+                      ghcr.io/openclaw/openclaw:latest
+                </div>
+                
+                <h3>3. 访问控制界面</h3>
+                <p>打开浏览器访问：</p>
+                <div class="code-block">
+                    http://localhost:18789
+                </div>
+            </section>
+            
+            <section id="verification">
+                <h2>验证安装</h2>
+                
+                <h3>检查版本</h3>
+                <div class="code-block">
+                    openclaw --version
+                </div>
+                
+                <h3>查看帮助</h3>
+                <div class="code-block">
+                    openclaw --help
+                </div>
+                
+                <h3>运行引导设置</h3>
+                <div class="code-block">
+                    openclaw onboard --install-daemon
+                </div>
+                
+                <p>如果以上命令都能正常执行，说明安装成功。</p>
+            </section>
+            
+            <section id="troubleshooting">
+                <h2>故障排除</h2>
+                
+                <h3>权限被拒绝</h3>
+                <p><strong>问题：</strong>安装时出现 "EACCES: permission denied" 错误</p>
+                <p><strong>解决方案：</strong></p>
+                <div class="code-block">
+                    # 使用 sudo (Linux/macOS)
+                    sudo npm install -g openclaw@latest
+                    
+                    # 或修复 npm 权限
+                    npm config set prefix ~/.npm-global
+                    echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+                    source ~/.bashrc
+                </div>
+                
+                <h3>命令未找到</h3>
+                <p><strong>问题：</strong>安装后运行 openclaw 命令提示未找到</p>
+                <p><strong>解决方案：</strong>确保 npm 的全局 bin 目录在 PATH 环境变量中</p>
+                
+                <h3>端口被占用</h3>
+                <p><strong>问题：</strong>启动网关时端口 18789 被占用</p>
+                <p><strong>解决方案：</strong>使用其他端口</p>
+                <div class="code-block">
+                    openclaw gateway --port 18790
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>OpenClaw 中文文档</h3>
+            <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
+            
+                        <div class="footer-links">
+                <a href="/openclaw-chinese/">首页</a>
+                <a href="/openclaw-chinese/getting-started/">快速开始</a>
+                <a href="/openclaw-chinese/installation/">安装</a>
+                <a href="/openclaw-chinese/gateway/">网关与运维</a>
+                <a href="/openclaw-chinese/channels/">消息渠道</a>
+                <a href="/openclaw-chinese/platforms/">平台</a>
+                <a href="/openclaw-chinese/tools/">工具</a>
+                <a href="/openclaw-chinese/models/">模型</a>
+                <a href="/openclaw-chinese/api/">API</a>
+                <a href="/openclaw-chinese/community/">社区</a>
+                <a href="/openclaw-chinese/help/">帮助</a>
+                <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub 仓库</a>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
+                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平台切换
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏激活
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
