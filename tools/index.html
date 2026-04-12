@@ -109,8 +109,22 @@
             color: var(--dark-color);
         }
         
+        .doc-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+        
         .doc-content p {
             margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
         }
         
         .code-block {
@@ -129,6 +143,58 @@
             padding: 15px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+        }
+        
+        .tip {
+            background: #f0fff4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .steps {
+            margin: 30px 0;
+        }
+        
+        .step {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: bold;
         }
         
         /* 页脚 */
@@ -192,6 +258,10 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .doc-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -210,7 +280,7 @@
                 <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
                 <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
                 <li><a href="/openclaw-chinese/platforms/">平台</a></li>
-                <li><a href="/openclaw-chinese/tools/">工具</a></li>
+                <li><a href="/openclaw-chinese/tools/" class="active">工具</a></li>
                 <li><a href="/openclaw-chinese/models/">模型</a></li>
                 <li><a href="/openclaw-chinese/api/">API</a></li>
                 <li><a href="/openclaw-chinese/community/">社区</a></li>
@@ -223,31 +293,132 @@
     <!-- 文档内容 -->
     <div class="doc-container">
         <main class="doc-content">
-            <h1>工具</h1>
-            <p>命令行工具和实用程序</p>
+            <h1>工具与插件</h1>
             
             <div class="note">
-                <p><strong>注意：</strong>此页面正在建设中。内容将很快更新。</p>
-                <p>OpenClaw 中文文档项目正在积极开发中，我们将尽快完善所有页面内容。</p>
+                <p><strong>文档反馈</strong></p>
+                <p>如果您在本页面遇到不正确、过时或令人困惑的文档，请通过以下方式提交反馈：</p>
+                <p>POST 请求到：https://docs.openclaw.ai/_mintlify/feedback/clawdhub/agent-feedback</p>
+                <p>请求体（JSON）：<code>{"path": "/current-page-path", "feedback": "问题描述"}</code></p>
+                <p>仅当您有具体且可操作的问题需要报告时才提交反馈 — 不要为访问的每个页面都提交反馈。</p>
             </div>
             
-            <h2>即将更新</h2>
-            <p>我们正在翻译和整理官方文档内容，包括：</p>
+            <p>代理生成文本之外的所有操作都通过<strong>工具</strong>进行。</p>
+            <p>工具是代理读取文件、运行命令、浏览网页、发送消息以及与设备交互的方式。</p>
+            
+            <h2>工具、技能和插件</h2>
+            <p>OpenClaw 有三个协同工作的层次：</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">工具是代理调用的内容</div>
+                    <p>工具是代理可以调用的类型化函数（例如 <code>exec</code>、<code>browser</code>、<code>web_search</code>、<code>message</code>）。OpenClaw 附带一组<strong>内置工具</strong>，插件可以注册额外的工具。</p>
+                    <p>代理将工具视为发送到模型 API 的结构化函数定义。</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">技能教导代理何时以及如何使用</div>
+                    <p>技能是注入到系统提示中的 markdown 文件（<code>SKILL.md</code>）。</p>
+                    <p>技能为代理提供上下文、约束和逐步指导，以有效使用工具。技能存在于您的工作空间、共享文件夹中，或随插件一起提供。</p>
+                    <p><a href="/openclaw-chinese/tools/skills">技能参考</a> | <a href="/openclaw-chinese/tools/creating-skills">创建技能</a></p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">插件将所有内容打包在一起</div>
+                    <p>插件是一个可以注册任何功能组合的包：渠道、模型提供商、工具、技能、语音、实时转录、实时语音、媒体理解、图像生成、视频生成、网页抓取、网页搜索等。</p>
+                    <p>一些插件是<strong>核心</strong>（随 OpenClaw 一起提供），其他是<strong>外部</strong>（由社区在 npm 上发布）。</p>
+                    <p><a href="/openclaw-chinese/tools/plugin">安装和配置插件</a> | <a href="/openclaw-chinese/plugins/building-plugins">构建自己的插件</a></p>
+                </div>
+            </div>
+            
+            <h2>内置工具</h2>
+            <p>这些工具随 OpenClaw 一起提供，无需安装任何插件即可使用：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>工具</th>
+                        <th>功能</th>
+                        <th>页面</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>exec</code> / <code>process</code></td>
+                        <td>运行 shell 命令，管理后台进程</td>
+                        <td><a href="/openclaw-chinese/tools/exec">Exec</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>code_execution</code></td>
+                        <td>运行沙盒远程 Python 分析</td>
+                        <td><a href="/openclaw-chinese/tools/code-execution">代码执行</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>browser</code></td>
+                        <td>控制 Chromium 浏览器（导航、点击、截图）</td>
+                        <td><a href="/openclaw-chinese/tools/browser">浏览器</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>web_search</code></td>
+                        <td>使用 Kimi by Moonshot 搜索网页</td>
+                        <td><a href="/openclaw-chinese/tools/web-search">网页搜索</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>web_fetch</code></td>
+                        <td>从 URL 获取和提取可读内容</td>
+                        <td><a href="/openclaw-chinese/tools/web-fetch">网页抓取</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>message</code></td>
+                        <td>发送消息到聊天渠道</td>
+                        <td><a href="/openclaw-chinese/tools/message">消息</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>read</code> / <code>edit</code> / <code>write</code></td>
+                        <td>文件系统操作</td>
+                        <td><a href="/openclaw-chinese/tools/files">文件操作</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>插件生态系统</h2>
+            <p>OpenClaw 拥有丰富的插件生态系统，扩展其功能：</p>
+            
             <ul>
-                <li>详细的使用指南</li>
-                <li>配置示例和最佳实践</li>
-                <li>故障排除和常见问题</li>
-                <li>中文用户特别说明</li>
+                <li><strong>渠道插件</strong>：连接各种聊天应用（Telegram、WhatsApp、微信等）</li>
+                <li><strong>模型提供商插件</strong>：支持不同的 AI 模型（OpenAI、Anthropic、Google 等）</li>
+                <li><strong>工具插件</strong>：添加新的工具功能</li>
+                <li><strong>技能插件</strong>：提供预定义的技能和工作流</li>
+                <li><strong>媒体插件</strong>：语音、图像、视频处理功能</li>
             </ul>
             
-            <h2>临时解决方案</h2>
-            <p>在内容完善之前，您可以：</p>
-            <ol>
-                <li>查看其他相关页面获取信息</li>
-                <li>访问 <a href="https://openclaw.ai" target="_blank">OpenClaw 官方英文文档</a></li>
-                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">OpenClaw Discord 社区</a> 获取帮助</li>
-                <li>在 <a href="https://github.com/zhidengzhe/openclaw-chinese/issues" target="_blank">GitHub Issues</a> 中提出您的问题</li>
-            </ol>
+            <div class="tip">
+                <p><strong>提示</strong></p>
+                <p>开始使用工具的建议：</p>
+                <ol>
+                    <li>首先熟悉内置工具，它们覆盖了大多数常见需求</li>
+                    <li>根据需要安装插件扩展功能</li>
+                    <li>创建自定义技能来优化特定工作流</li>
+                    <li>定期检查插件更新和新功能</li>
+                </ol>
+            </div>
+            
+            <h2>工具使用最佳实践</h2>
+            <ul>
+                <li><strong>安全性</strong>：谨慎使用 <code>exec</code> 工具，避免运行不受信任的命令</li>
+                <li><strong>效率</strong>：批量操作时使用适当的工具组合</li>
+                <li><strong>错误处理</strong>：在技能中包含错误处理和恢复步骤</li>
+                <li><strong>文档</strong>：为自定义工具和技能编写清晰的文档</li>
+                <li><strong>测试</strong>：在生产环境使用前充分测试工具配置</li>
+            </ul>
+            
+            <h2>需要帮助？</h2>
+            <ul>
+                <li>查看具体的工具使用指南</li>
+                <li>访问 <a href="/openclaw-chinese/help/">帮助中心</a></li>
+                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">Discord 社区</a></li>
+                <li>在 <a href="https://github.com/openclaw/openclaw/issues" target="_blank">GitHub Issues</a> 中报告问题</li>
+            </ul>
         </main>
     </div>
 
@@ -257,46 +428,6 @@
             <h3>OpenClaw 中文文档</h3>
             <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
             
-                        <div class="footer-links">
+            <div class="footer-links">
                 <a href="/openclaw-chinese/">首页</a>
-                <a href="/openclaw-chinese/getting-started/">快速开始</a>
-                <a href="/openclaw-chinese/installation/">安装</a>
-                <a href="/openclaw-chinese/gateway/">网关与运维</a>
-                <a href="/openclaw-chinese/channels/">消息渠道</a>
-                <a href="/openclaw-chinese/platforms/">平台</a>
-                <a href="/openclaw-chinese/tools/">工具</a>
-                <a href="/openclaw-chinese/models/">模型</a>
-                <a href="/openclaw-chinese/api/">API</a>
-                <a href="/openclaw-chinese/community/">社区</a>
-                <a href="/openclaw-chinese/help/">帮助</a>
-                <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub 仓库</a>
-            </div>
-            
-            <div class="copyright">
-                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
-                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // 导航栏激活
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http')) {
-                    if (currentPath === href || 
-                        (href === '/openclaw-chinese/tools/' && currentPath.includes('/tools'))) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <a href="/openclaw-chinese/getting-started
