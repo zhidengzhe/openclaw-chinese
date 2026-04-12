@@ -109,8 +109,22 @@
             color: var(--dark-color);
         }
         
+        .doc-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+        
         .doc-content p {
             margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
         }
         
         .code-block {
@@ -129,6 +143,65 @@
             padding: 15px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+        }
+        
+        .tip {
+            background: #f0fff4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .channel-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .channel-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .channel-desc {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .channel-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .channel-link:hover {
+            text-decoration: underline;
         }
         
         /* 页脚 */
@@ -192,6 +265,14 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .doc-content {
+                padding: 20px;
+            }
+            
+            .channel-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -208,7 +289,7 @@
                 <li><a href="/openclaw-chinese/getting-started/">快速开始</a></li>
                 <li><a href="/openclaw-chinese/installation/">安装</a></li>
                 <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
-                <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
+                <li><a href="/openclaw-chinese/channels/" class="active">消息渠道</a></li>
                 <li><a href="/openclaw-chinese/platforms/">平台</a></li>
                 <li><a href="/openclaw-chinese/tools/">工具</a></li>
                 <li><a href="/openclaw-chinese/models/">模型</a></li>
@@ -223,80 +304,213 @@
     <!-- 文档内容 -->
     <div class="doc-container">
         <main class="doc-content">
-            <h1>消息渠道</h1>
-            <p>连接 WhatsApp、Telegram、Discord 等消息平台</p>
+            <h1>聊天渠道</h1>
             
             <div class="note">
-                <p><strong>注意：</strong>此页面正在建设中。内容将很快更新。</p>
-                <p>OpenClaw 中文文档项目正在积极开发中，我们将尽快完善所有页面内容。</p>
+                <p><strong>文档反馈</strong></p>
+                <p>如果您在本页面遇到不正确、过时或令人困惑的文档，请通过以下方式提交反馈：</p>
+                <p>POST 请求到：https://docs.openclaw.ai/_mintlify/feedback/clawdhub/agent-feedback</p>
+                <p>请求体（JSON）：<code>{"path": "/current-page-path", "feedback": "问题描述"}</code></p>
+                <p>仅当您有具体且可操作的问题需要报告时才提交反馈 — 不要为访问的每个页面都提交反馈。</p>
             </div>
             
-            <h2>即将更新</h2>
-            <p>我们正在翻译和整理官方文档内容，包括：</p>
+            <p>OpenClaw 可以在您已经使用的任何聊天应用上与您交谈。每个渠道都通过网关连接。</p>
+            <p>文本在所有地方都受支持；媒体和反应因渠道而异。</p>
+            
+            <h2>支持的渠道</h2>
+            
+            <div class="channel-grid">
+                <div class="channel-card">
+                    <div class="channel-name">BlueBubbles</div>
+                    <div class="channel-desc"><strong>推荐用于 iMessage</strong>；使用 BlueBubbles macOS 服务器 REST API，支持完整功能（捆绑插件；编辑、取消发送、效果、反应、群组管理 — 编辑目前在 macOS 26 Tahoe 上已损坏）。</div>
+                    <a href="/openclaw-chinese/channels/bluebubbles" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Discord</div>
+                    <div class="channel-desc">Discord Bot API + Gateway；支持服务器、频道和私信。</div>
+                    <a href="/openclaw-chinese/channels/discord" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">飞书 (Feishu)</div>
+                    <div class="channel-desc">通过 WebSocket 的飞书/Lark 机器人（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/feishu" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Google Chat</div>
+                    <div class="channel-desc">通过 HTTP webhook 的 Google Chat API 应用。</div>
+                    <a href="/openclaw-chinese/channels/googlechat" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">iMessage (旧版)</div>
+                    <div class="channel-desc">通过 imsg CLI 的旧版 macOS 集成（已弃用，新设置请使用 BlueBubbles）。</div>
+                    <a href="/openclaw-chinese/channels/imessage" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">IRC</div>
+                    <div class="channel-desc">经典 IRC 服务器；带有配对/白名单控制的频道 + 私信。</div>
+                    <a href="/openclaw-chinese/channels/irc" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">LINE</div>
+                    <div class="channel-desc">LINE Messaging API 机器人（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/line" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Matrix</div>
+                    <div class="channel-desc">Matrix 协议（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/matrix" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Mattermost</div>
+                    <div class="channel-desc">Bot API + WebSocket；频道、群组、私信（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/mattermost" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Microsoft Teams</div>
+                    <div class="channel-desc">Bot Framework；企业支持（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/msteams" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Nextcloud Talk</div>
+                    <div class="channel-desc">通过 Nextcloud Talk 的自托管聊天（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/nextcloud-talk" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Nostr</div>
+                    <div class="channel-desc">通过 NIP-04 的去中心化私信（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/nostr" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">QQ 机器人</div>
+                    <div class="channel-desc">QQ Bot API；私聊、群聊和富媒体（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/qqbot" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Signal</div>
+                    <div class="channel-desc">signal-cli；注重隐私。</div>
+                    <a href="/openclaw-chinese/channels/signal" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Slack</div>
+                    <div class="channel-desc">Bolt SDK；工作区应用。</div>
+                    <a href="/openclaw-chinese/channels/slack" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Synology Chat</div>
+                    <div class="channel-desc">通过出站+入站 webhook 的 Synology NAS Chat（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/synology-chat" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Telegram</div>
+                    <div class="channel-desc">通过 grammY 的 Bot API；支持群组。</div>
+                    <a href="/openclaw-chinese/channels/telegram" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Tlon</div>
+                    <div class="channel-desc">基于 Urbit 的 messenger（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/tlon" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Twitch</div>
+                    <div class="channel-desc">通过 IRC 连接的 Twitch 聊天（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/twitch" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">语音通话</div>
+                    <div class="channel-desc">通过 Plivo 或 Twilio 的电话（插件，单独安装）。</div>
+                    <a href="/openclaw-chinese/plugins/voice-call" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">WebChat</div>
+                    <div class="channel-desc">通过 WebSocket 的网关 WebChat UI。</div>
+                    <a href="/openclaw-chinese/web/webchat" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">微信</div>
+                    <div class="channel-desc">通过二维码登录的腾讯 iLink Bot 插件；仅支持私聊。</div>
+                    <a href="https://www.npmjs.com/package/@tencent-weixin/openclaw-weixin" target="_blank" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">WhatsApp</div>
+                    <div class="channel-desc">最受欢迎；使用 Baileys 并需要二维码配对。</div>
+                    <a href="/openclaw-chinese/channels/whatsapp" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Zalo</div>
+                    <div class="channel-desc">Zalo Bot API；越南流行的 messenger（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/zalo" class="channel-link">查看详情 →</a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-name">Zalo Personal</div>
+                    <div class="channel-desc">通过二维码登录的 Zalo 个人账户（捆绑插件）。</div>
+                    <a href="/openclaw-chinese/channels/zalouser" class="channel-link">查看详情 →</a>
+                </div>
+            </div>
+            
+            <h2>注意事项</h2>
             <ul>
-                <li>详细的使用指南</li>
-                <li>配置示例和最佳实践</li>
-                <li>故障排除和常见问题</li>
-                <li>中文用户特别说明</li>
+                <li>渠道可以同时运行；配置多个，OpenClaw 将按聊天路由。</li>
+                <li>最快的设置通常是 <strong>Telegram</strong>（简单的机器人令牌）。WhatsApp 需要二维码配对并在磁盘上存储更多状态。</li>
+                <li>群组行为因渠道而异；请参阅 <a href="/openclaw-chinese/channels/groups">群组</a>。</li>
+                <li>为安全起见，强制执行私信配对和白名单；请参阅 <a href="/openclaw-chinese/gateway/security">安全</a>。</li>
+                <li>故障排除：<a href="/openclaw-chinese/channels/troubleshooting">渠道故障排除</a>。</li>
+                <li>模型提供商单独记录；请参阅 <a href="/openclaw-chinese/providers/models">模型提供商</a>。</li>
             </ul>
             
-            <h2>临时解决方案</h2>
-            <p>在内容完善之前，您可以：</p>
+            <div class="tip">
+                <p><strong>提示</strong></p>
+                <p>选择渠道的建议：</p>
+                <ol>
+                    <li><strong>快速开始</strong>：使用 Telegram（设置最简单）</li>
+                    <li><strong>隐私优先</strong>：使用 Signal 或 Matrix</li>
+                    <li><strong>企业环境</strong>：使用 Microsoft Teams 或 Slack</li>
+                    <li><strong>中国用户</strong>：使用微信、QQ 或飞书</li>
+                    <li><strong>通用性</strong>：使用 WhatsApp（用户最多）</li>
+                </ol>
+            </div>
+            
+            <h2>设置步骤</h2>
             <ol>
-                <li>查看其他相关页面获取信息</li>
-                <li>访问 <a href="https://openclaw.ai" target="_blank">OpenClaw 官方英文文档</a></li>
-                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">OpenClaw Discord 社区</a> 获取帮助</li>
-                <li>在 <a href="https://github.com/zhidengzhe/openclaw-chinese/issues" target="_blank">GitHub Issues</a> 中提出您的问题</li>
+                <li><strong>选择渠道</strong>：根据您的需求选择合适的聊天应用</li>
+                <li><strong>获取凭证</strong>：按照具体渠道指南获取 API 令牌或设置机器人</li>
+                <li><strong>配置网关</strong>：在 OpenClaw 配置中添加渠道设置</li>
+                <li><strong>测试连接</strong>：使用 <code>openclaw channels status --probe</code> 测试连接</li>
+                <li><strong>开始聊天</strong>：在配置的渠道上与 OpenClaw 助手聊天</li>
             </ol>
-        </main>
-    </div>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>OpenClaw 中文文档</h3>
-            <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
             
-                        <div class="footer-links">
-                <a href="/openclaw-chinese/">首页</a>
-                <a href="/openclaw-chinese/getting-started/">快速开始</a>
-                <a href="/openclaw-chinese/installation/">安装</a>
-                <a href="/openclaw-chinese/gateway/">网关与运维</a>
-                <a href="/openclaw-chinese/channels/">消息渠道</a>
-                <a href="/openclaw-chinese/platforms/">平台</a>
-                <a href="/openclaw-chinese/tools/">工具</a>
-                <a href="/openclaw-chinese/models/">模型</a>
-                <a href="/openclaw-chinese/api/">API</a>
-                <a href="/openclaw-chinese/community/">社区</a>
-                <a href="/openclaw-chinese/help/">帮助</a>
-                <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub 仓库</a>
+            <div class="note">
+                <p><strong>注意</strong></p>
+                <p>大多数渠道插件已捆绑在 OpenClaw 中，无需额外安装。少数渠道（如微信）需要单独安装插件。</p>
             </div>
             
-            <div class="copyright">
-                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
-                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // 导航栏激活
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http')) {
-                    if (currentPath === href || 
-                        (href === '/openclaw-chinese/channels/' && currentPath.includes('/channels'))) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            <h2>需要帮助？</h2>
+            <ul>
+                <li>查看具体的渠道设置指南</li>
+                <li>访问 <a href="/openclaw-chinese/help/">帮助中心</a></li>
+                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">Discord 社区</a></li>
+                <li>在 <a href="https://github.com/openclaw/openclaw/issues" target="_blank">GitHub Issues</a> 中报告问题</li>
+            </ul>
