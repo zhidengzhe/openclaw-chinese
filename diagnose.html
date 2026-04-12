@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>编码诊断页面</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .ascii { background: #f0f8ff; }
+        .chinese { background: #f0fff0; }
+    </style>
+</head>
+<body>
+    <h1>编码诊断测试</h1>
+    
+    <div class="test ascii">
+        <h2>测试1: ASCII字符</h2>
+        <p>Hello World! This is ASCII text.</p>
+        <p>1234567890 !@#$%^&*()</p>
+    </div>
+    
+    <div class="test chinese">
+        <h2>测试2: 中文字符</h2>
+        <p>快速开始 - 安装 OpenClaw</p>
+        <p>这是一个简单的编码测试页面。</p>
+        <p>如果这些文字显示正常，说明编码正确。</p>
+    </div>
+    
+    <div class="test">
+        <h2>测试3: 混合字符</h2>
+        <p>OpenClaw 中文文档 - Chinese Documentation</p>
+        <p>命令: <code>openclaw onboard</code> 初始化设置</p>
+        <p>节点版本: Node.js 24+ 推荐</p>
+    </div>
+    
+    <div class="test">
+        <h2>页面信息</h2>
+        <p>文件编码: UTF-8 (无BOM)</p>
+        <p>生成时间: 2026-04-12 09:40</p>
+        <p>测试目的: 诊断乱码问题</p>
+    </div>
+</body>
+</html>
