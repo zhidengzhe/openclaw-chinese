@@ -87,48 +87,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 40px;
-        }
-        
-        /* 侧边栏 */
-        .sidebar {
-            position: sticky;
-            top: 90px;
-            height: fit-content;
-        }
-        
-        .sidebar h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .sidebar ul {
-            list-style: none;
-        }
-        
-        .sidebar li {
-            margin-bottom: 10px;
-        }
-        
-        .sidebar a {
-            text-decoration: none;
-            color: var(--gray-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar a:hover {
-            background-color: var(--border-color);
-            color: var(--primary-color);
-        }
-        
-        .sidebar a.active {
-            background-color: var(--primary-color);
-            color: white;
         }
         
         /* 主内容 */
@@ -158,6 +116,15 @@
         
         .doc-content p {
             margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
         }
         
         .code-block {
@@ -176,6 +143,98 @@
             padding: 15px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+        }
+        
+        .tip {
+            background: #f0fff4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .card-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .steps {
+            margin: 30px 0;
+        }
+        
+        .step {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: bold;
         }
         
         /* 页脚 */
@@ -217,14 +276,6 @@
         
         /* 响应式 */
         @media (max-width: 768px) {
-            .doc-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: static;
-            }
-            
             .nav-container {
                 flex-direction: column;
                 height: auto;
@@ -241,6 +292,19 @@
             .nav-links a {
                 display: block;
                 text-align: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .doc-content {
+                padding: 20px;
+            }
+            
+            .card-group {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -272,211 +336,207 @@
 
     <!-- 文档内容 -->
     <div class="doc-container">
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-            <h3>网关与运维</h3>
-            <ul>
-                <li><a href="#introduction" class="active">介绍</a></li>
-                <li><a href="#gateway-overview">网关概述</a></li>
-                <li><a href="#installation">安装网关</a></li>
-                <li><a href="#configuration">配置网关</a></li>
-                <li><a href="#operation">运行与监控</a></li>
-                <li><a href="#troubleshooting">故障排除</a></li>
-            </ul>
-        </aside>
-
-        <!-- 主内容 -->
         <main class="doc-content">
-            <h1>网关与运维</h1>
+            <h1>网关运维手册</h1>
             
-            <section id="introduction">
-                <h2>介绍</h2>
-                <p>网关是 OpenClaw 的核心组件，负责处理所有消息路由、会话管理和插件加载。本指南将介绍如何安装、配置和运维 OpenClaw 网关。</p>
-            </section>
-            
-            <section id="gateway-overview">
-                <h2>网关概述</h2>
-                <p>OpenClaw 网关是一个长期运行的服务，它：</p>
-                <ul>
-                    <li>管理所有连接到 OpenClaw 的设备（节点）</li>
-                    <li>路由消息到正确的技能和插件</li>
-                    <li>维护用户会话状态</li>
-                    <li>加载和管理技能</li>
-                    <li>提供管理界面</li>
-                </ul>
-            </section>
-            
-            <section id="installation">
-                <h2>安装网关</h2>
-                
-                <h3>作为服务安装</h3>
-                <div class="code-block">
-                    # 安装 OpenClaw（如果尚未安装）
-                    npm install -g openclaw@latest
-                    
-                    # 安装网关服务
-                    openclaw onboard --install-daemon
-                </div>
-                
-                <h3>手动运行</h3>
-                <div class="code-block">
-                    # 启动网关
-                    openclaw gateway --port 18789
-                    
-                    # 或使用默认端口
-                    openclaw gateway
-                </div>
-            </section>
-            
-            <section id="configuration">
-                <h2>配置网关</h2>
-                
-                <h3>基本配置</h3>
-                <div class="code-block">
-                    # 查看当前配置
-                    openclaw config show
-                    
-                    # 编辑配置
-                    openclaw config edit
-                </div>
-                
-                <h3>重要配置项</h3>
-                <ul>
-                    <li><strong>端口</strong>: 网关监听的端口（默认: 18789）</li>
-                    <li><strong>绑定地址</strong>: 网关绑定的网络地址</li>
-                    <li><strong>日志级别</strong>: 控制日志详细程度</li>
-                    <li><strong>技能目录</strong>: 技能安装位置</li>
-                </ul>
-            </section>
-            
-            <section id="operation">
-                <h2>运行与监控</h2>
-                
-                <h3>启动和停止</h3>
-                <div class="code-block">
-                    # 启动网关服务
-                    openclaw gateway start
-                    
-                    # 停止网关服务
-                    openclaw gateway stop
-                    
-                    # 重启网关服务
-                    openclaw gateway restart
-                    
-                    # 查看状态
-                    openclaw gateway status
-                </div>
-                
-                <h3>监控日志</h3>
-                <div class="code-block">
-                    # 查看实时日志
-                    openclaw logs --follow
-                    
-                    # 查看特定技能的日志
-                    openclaw logs --skill weather
-                </div>
-            </section>
-            
-            <section id="troubleshooting">
-                <h2>故障排除</h2>
-                
-                <h3>常见问题</h3>
-                
-                <h4>网关无法启动</h4>
-                <p><strong>可能原因</strong>: 端口被占用，权限不足，配置错误</p>
-                <p><strong>解决方案</strong>:</p>
-                <div class="code-block">
-                    # 使用其他端口
-                    openclaw gateway --port 18790
-                    
-                    # 调试模式运行
-                    openclaw gateway --debug
-                    
-                    # 检查日志
-                    openclaw logs
-                </div>
-                
-                <h4>服务无法安装</h4>
-                <p><strong>可能原因</strong>: 系统不支持，权限不足</p>
-                <p><strong>解决方案</strong>: 手动运行网关或检查系统权限</p>
-            </section>
-        </main>
-    </div>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>OpenClaw 中文文档</h3>
-            <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
-            
-                        <div class="footer-links">
-                <a href="/openclaw-chinese/">首页</a>
-                <a href="/openclaw-chinese/getting-started/">快速开始</a>
-                <a href="/openclaw-chinese/installation/">安装</a>
-                <a href="/openclaw-chinese/gateway/">网关与运维</a>
-                <a href="/openclaw-chinese/channels/">消息渠道</a>
-                <a href="/openclaw-chinese/platforms/">平台</a>
-                <a href="/openclaw-chinese/tools/">工具</a>
-                <a href="/openclaw-chinese/models/">模型</a>
-                <a href="/openclaw-chinese/api/">API</a>
-                <a href="/openclaw-chinese/community/">社区</a>
-                <a href="/openclaw-chinese/help/">帮助</a>
-                <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub 仓库</a>
+            <div class="note">
+                <p><strong>文档反馈</strong></p>
+                <p>如果您在本页面遇到不正确、过时或令人困惑的文档，请通过以下方式提交反馈：</p>
+                <p>POST 请求到：https://docs.openclaw.ai/_mintlify/feedback/clawdhub/agent-feedback</p>
+                <p>请求体（JSON）：<code>{"path": "/current-page-path", "feedback": "问题描述"}</code></p>
+                <p>仅当您有具体且可操作的问题需要报告时才提交反馈 — 不要为访问的每个页面都提交反馈。</p>
             </div>
             
-            <div class="copyright">
-                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
-                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
+            <p>使用本页面进行网关服务的第1天启动和第2天运维。</p>
+            
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-siren"></i> 深度故障排除</div>
+                    <p>基于症状的诊断，包含精确的命令阶梯和日志特征。</p>
+                    <p><a href="/openclaw-chinese/gateway/troubleshooting">查看详情 →</a></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-sliders"></i> 配置</div>
+                    <p>面向任务的设置指南 + 完整配置参考。</p>
+                    <p><a href="/openclaw-chinese/gateway/configuration">查看详情 →</a></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-key"></i> 密钥管理</div>
+                    <p>SecretRef 合约、运行时快照行为以及迁移/重新加载操作。</p>
+                    <p><a href="/openclaw-chinese/gateway/secrets">查看详情 →</a></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-shield-check"></i> 密钥计划合约</div>
+                    <p>精确的 <code>secrets apply</code> 目标/路径规则和仅引用认证配置文件行为。</p>
+                    <p><a href="/openclaw-chinese/gateway/secrets-plan-contract">查看详情 →</a></p>
+                </div>
             </div>
-        </div>
-    </footer>
-
-    <script>
-        // 简单的导航和侧边栏激活
-        document.addEventListener('DOMContentLoaded', function() {
-            // 导航栏激活
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a');
             
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http')) {
-                    if (currentPath === href || 
-                        (href === '/openclaw-chinese/gateway/' && currentPath.includes('/gateway'))) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                }
-            });
+            <h2>5分钟本地启动</h2>
             
-            // 侧边栏滚动激活
-            const sections = document.querySelectorAll('section');
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
-            
-            function updateSidebarActive() {
-                let currentSection = '';
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">步骤 1：启动网关</div>
+                    <div class="code-block">
+openclaw gateway --port 18789
+# debug/trace 镜像到标准输出
+openclaw gateway --port 18789 --verbose
+# 强制终止选定端口上的监听器，然后启动
+openclaw gateway --force
+                    </div>
+                </div>
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= sectionTop - 100) {
-                        currentSection = section.id;
-                    }
-                });
+                <div class="step">
+                    <div class="step-title">步骤 2：验证服务健康状态</div>
+                    <div class="code-block">
+openclaw gateway status
+openclaw status
+openclaw logs --follow
+                    </div>
+                    <p>健康基准：<code>Runtime: running</code> 和 <code>RPC probe: ok</code>。</p>
+                </div>
                 
-                sidebarLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSection}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
+                <div class="step">
+                    <div class="step-title">步骤 3：验证渠道就绪状态</div>
+                    <div class="code-block">
+openclaw channels status --probe
+                    </div>
+                    <p>在网关可达的情况下，这会运行实时的每个账户渠道探测和可选审计。</p>
+                    <p>如果网关不可达，CLI 将回退到仅配置的渠道摘要，而不是实时探测输出。</p>
+                </div>
+            </div>
             
-            window.addEventListener('scroll', updateSidebarActive);
-            updateSidebarActive();
-        });
-    </script>
-</body>
-</html>
+            <div class="note">
+                <p><strong>注意</strong></p>
+                <p>网关配置重新加载监视活动配置文件路径（从配置文件/状态默认值解析，或设置 <code>OPENCLAW_CONFIG_PATH</code> 时）。</p>
+                <p>默认模式是 <code>gateway.reload.mode="hybrid"</code>。</p>
+                <p>第一次成功加载后，运行进程提供活动内存配置快照；成功的重新加载会原子性地交换该快照。</p>
+            </div>
+            
+            <h2>运行时模型</h2>
+            <ul>
+                <li>一个始终运行的进程，用于路由、控制平面和渠道连接。</li>
+                <li>单一多路复用端口用于：
+                    <ul>
+                        <li>WebSocket 控制/RPC</li>
+                        <li>HTTP API，OpenAI 兼容（<code>/v1/models</code>、<code>/v1/embeddings</code>、<code>/v1/chat/completions</code>、<code>/v1/responses</code>、<code>/tools/invoke</code>）</li>
+                        <li>控制 UI 和钩子</li>
+                    </ul>
+                </li>
+                <li>默认绑定模式：<code>loopback</code>。</li>
+                <li>默认需要身份验证。共享密钥设置使用 <code>gateway.auth.token</code> / <code>gateway.auth.password</code>（或 <code>OPENCLAW_GATEWAY_TOKEN</code> / <code>OPENCLAW_GATEWAY_PASSWORD</code>），非环回反向代理设置可以使用 <code>gateway.auth.mode: "trusted-proxy"</code>。</li>
+            </ul>
+            
+            <h2>OpenAI 兼容端点</h2>
+            <p>OpenClaw 最高杠杆兼容性表面现在是：</p>
+            <ul>
+                <li><code>GET /v1/models</code></li>
+                <li><code>GET /v1/models/{id}</code></li>
+                <li><code>POST /v1/embeddings</code></li>
+                <li><code>POST /v1/chat/completions</code></li>
+                <li><code>POST /v1/responses</code></li>
+            </ul>
+            
+            <p>为什么这组端点重要：</p>
+            <ul>
+                <li>大多数 Open WebUI、LobeChat 和 LibreChat 集成首先探测 <code>/v1/models</code>。</li>
+                <li>许多 RAG 和内存管道期望 <code>/v1/embeddings</code>。</li>
+                <li>代理原生客户端越来越倾向于 <code>/v1/responses</code>。</li>
+            </ul>
+            
+            <div class="note">
+                <p><strong>规划说明</strong></p>
+                <p><code>/v1/models</code> 是代理优先的：它返回 <code>openclaw</code>、<code>openclaw/default</code> 和 <code>openclaw/&lt;agentId&gt;</code>。</p>
+                <p><code>openclaw/default</code> 是稳定别名，始终映射到配置的默认代理。</p>
+                <p>当您需要后端提供商/模型覆盖时使用 <code>x-openclaw-model</code>；否则所选代理的正常模型和嵌入设置保持控制。</p>
+            </div>
+            
+            <p>所有这些都在主网关端口上运行，并使用与网关 HTTP API 其余部分相同的可信操作员身份验证边界。</p>
+            
+            <h3>端口和绑定优先级</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>设置</th>
+                        <th>解析顺序</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>网关端口</td>
+                        <td><code>--port</code> → <code>OPENCLAW_GATEWAY_PORT</code> → <code>gateway.port</code> → <code>18789</code></td>
+                    </tr>
+                    <tr>
+                        <td>绑定模式</td>
+                        <td>CLI/覆盖 → <code>gateway.bind</code> → <code>loopback</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>热重载模式</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><code>gateway.reload.mode</code></th>
+                        <th>行为</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>off</code></td>
+                        <td>无配置重载</td>
+                    </tr>
+                    <tr>
+                        <td><code>hot</code></td>
+                        <td>仅应用热安全更改</td>
+                    </tr>
+                    <tr>
+                        <td><code>restart</code></td>
+                        <td>在需要重新启动的更改时重新启动</td>
+                    </tr>
+                    <tr>
+                        <td><code>hybrid</code>（默认）</td>
+                        <td>安全时热应用，否则重新启动</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>运维最佳实践</h2>
+            <ul>
+                <li><strong>监控日志</strong>：定期检查 <code>openclaw logs</code> 输出</li>
+                <li><strong>健康检查</strong>：设置定期 <code>openclaw gateway status</code> 检查</li>
+                <li><strong>备份配置</strong>：定期备份网关配置文件</li>
+                <li><strong>更新策略</strong>：在低流量时段执行网关更新</li>
+                <li><strong>灾难恢复</strong>：制定网关故障恢复计划</li>
+            </ul>
+            
+            <div class="tip">
+                <p><strong>提示</strong></p>
+                <p>对于生产环境：</p>
+                <ol>
+                    <li>使用 <code>gateway.auth.token</code> 进行安全身份验证</li>
+                    <li>配置适当的日志级别和轮转</li>
+                    <li>设置监控和告警</li>
+                    <li>定期进行压力测试</li>
+                </ol>
+            </div>
+            
+            <h2>故障排除</h2>
+            <p>常见问题及解决方案：</p>
+            <ul>
+                <li><strong>网关无法启动</strong>：检查端口是否被占用，权限是否足够</li>
+                <li><strong>连接失败</strong>：验证网络配置和防火墙设置</li>
+                <li><strong>性能问题</strong>：检查系统资源使用情况，调整配置参数</li>
+                <li><strong>配置错误</strong>：使用 <code>openclaw config validate</code> 验证配置</li>
+            </ul>
+            
+            <h2>需要帮助？</h2>
+            <ul>
+                <li>查看详细的 <a href="/openclaw-chinese/gateway/troubleshooting">故障排除指南</a></li>
+                <li>访问 <a href="/openclaw-chinese/help/">帮助中心</a></li>
+                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">Discord 社区</a></li>
+                <li>在 <a href="https://github.com/openclaw/openclaw/issues" target="_blank">GitHub Issues</a> 中报告问题</li>
+            </ul>
