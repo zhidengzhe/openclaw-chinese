@@ -109,8 +109,22 @@
             color: var(--dark-color);
         }
         
+        .doc-content h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+        
         .doc-content p {
             margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .doc-content ul, .doc-content ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .doc-content li {
+            margin-bottom: 8px;
         }
         
         .code-block {
@@ -129,6 +143,66 @@
             padding: 15px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+        }
+        
+        .tip {
+            background: #f0fff4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .platform-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .platform-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .platform-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .platform-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .platform-link:hover {
+            text-decoration: underline;
         }
         
         /* 页脚 */
@@ -192,6 +266,14 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .doc-content {
+                padding: 20px;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -209,7 +291,7 @@
                 <li><a href="/openclaw-chinese/installation/">安装</a></li>
                 <li><a href="/openclaw-chinese/gateway/">网关与运维</a></li>
                 <li><a href="/openclaw-chinese/channels/">消息渠道</a></li>
-                <li><a href="/openclaw-chinese/platforms/">平台</a></li>
+                <li><a href="/openclaw-chinese/platforms/" class="active">平台</a></li>
                 <li><a href="/openclaw-chinese/tools/">工具</a></li>
                 <li><a href="/openclaw-chinese/models/">模型</a></li>
                 <li><a href="/openclaw-chinese/api/">API</a></li>
@@ -224,79 +306,152 @@
     <div class="doc-container">
         <main class="doc-content">
             <h1>平台</h1>
-            <p>在不同操作系统和环境中运行 OpenClaw</p>
             
             <div class="note">
-                <p><strong>注意：</strong>此页面正在建设中。内容将很快更新。</p>
-                <p>OpenClaw 中文文档项目正在积极开发中，我们将尽快完善所有页面内容。</p>
+                <p><strong>文档反馈</strong></p>
+                <p>如果您在本页面遇到不正确、过时或令人困惑的文档，请通过以下方式提交反馈：</p>
+                <p>POST 请求到：https://docs.openclaw.ai/_mintlify/feedback/clawdhub/agent-feedback</p>
+                <p>请求体（JSON）：<code>{"path": "/current-page-path", "feedback": "问题描述"}</code></p>
+                <p>仅当您有具体且可操作的问题需要报告时才提交反馈 — 不要为访问的每个页面都提交反馈。</p>
             </div>
             
-            <h2>即将更新</h2>
-            <p>我们正在翻译和整理官方文档内容，包括：</p>
+            <p>OpenClaw 核心使用 TypeScript 编写。<strong>Node 是推荐的运行时</strong>。</p>
+            <p>不建议将 Bun 用于网关（WhatsApp/Telegram 存在 bug）。</p>
+            
+            <p>macOS（菜单栏应用）和移动节点（iOS/Android）有配套应用。Windows 和 Linux 配套应用正在规划中，但网关今天已完全支持。</p>
+            <p>Windows 的原生配套应用也在规划中；建议通过 WSL2 使用网关。</p>
+            
+            <h2>选择您的操作系统</h2>
+            
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="platform-icon"><i class="fab fa-apple"></i></div>
+                    <div class="platform-name">macOS</div>
+                    <a href="/openclaw-chinese/platforms/macos" class="platform-link">查看详情 →</a>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon"><i class="fab fa-apple"></i></div>
+                    <div class="platform-name">iOS</div>
+                    <a href="/openclaw-chinese/platforms/ios" class="platform-link">查看详情 →</a>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon"><i class="fab fa-android"></i></div>
+                    <div class="platform-name">Android</div>
+                    <a href="/openclaw-chinese/platforms/android" class="platform-link">查看详情 →</a>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon"><i class="fab fa-windows"></i></div>
+                    <div class="platform-name">Windows</div>
+                    <a href="/openclaw-chinese/platforms/windows" class="platform-link">查看详情 →</a>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon"><i class="fab fa-linux"></i></div>
+                    <div class="platform-name">Linux</div>
+                    <a href="/openclaw-chinese/platforms/linux" class="platform-link">查看详情 →</a>
+                </div>
+            </div>
+            
+            <h2>VPS 与托管</h2>
+            
             <ul>
-                <li>详细的使用指南</li>
-                <li>配置示例和最佳实践</li>
-                <li>故障排除和常见问题</li>
-                <li>中文用户特别说明</li>
+                <li>VPS 中心：<a href="/openclaw-chinese/vps">VPS 托管</a></li>
+                <li>Fly.io：<a href="/openclaw-chinese/install/fly">Fly.io</a></li>
+                <li>Hetzner（Docker）：<a href="/openclaw-chinese/install/hetzner">Hetzner</a></li>
+                <li>GCP（Compute Engine）：<a href="/openclaw-chinese/install/gcp">GCP</a></li>
+                <li>Azure（Linux VM）：<a href="/openclaw-chinese/install/azure">Azure</a></li>
+                <li>exe.dev（VM + HTTPS 代理）：<a href="/openclaw-chinese/install/exe-dev">exe.dev</a></li>
             </ul>
             
-            <h2>临时解决方案</h2>
-            <p>在内容完善之前，您可以：</p>
-            <ol>
-                <li>查看其他相关页面获取信息</li>
-                <li>访问 <a href="https://openclaw.ai" target="_blank">OpenClaw 官方英文文档</a></li>
-                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank">OpenClaw Discord 社区</a> 获取帮助</li>
-                <li>在 <a href="https://github.com/zhidengzhe/openclaw-chinese/issues" target="_blank">GitHub Issues</a> 中提出您的问题</li>
-            </ol>
-        </main>
-    </div>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>OpenClaw 中文文档</h3>
-            <p>为中文用户提供完整的 OpenClaw 使用指南和文档</p>
+            <h2>常用链接</h2>
             
-                        <div class="footer-links">
-                <a href="/openclaw-chinese/">首页</a>
-                <a href="/openclaw-chinese/getting-started/">快速开始</a>
-                <a href="/openclaw-chinese/installation/">安装</a>
-                <a href="/openclaw-chinese/gateway/">网关与运维</a>
-                <a href="/openclaw-chinese/channels/">消息渠道</a>
-                <a href="/openclaw-chinese/platforms/">平台</a>
-                <a href="/openclaw-chinese/tools/">工具</a>
-                <a href="/openclaw-chinese/models/">模型</a>
-                <a href="/openclaw-chinese/api/">API</a>
-                <a href="/openclaw-chinese/community/">社区</a>
-                <a href="/openclaw-chinese/help/">帮助</a>
-                <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub 仓库</a>
+            <ul>
+                <li>安装指南：<a href="/openclaw-chinese/start/getting-started">快速开始</a></li>
+                <li>网关运维手册：<a href="/openclaw-chinese/gateway">网关</a></li>
+                <li>网关配置：<a href="/openclaw-chinese/gateway/configuration">配置</a></li>
+                <li>服务状态：<code>openclaw gateway status</code></li>
+            </ul>
+            
+            <h2>网关服务安装（CLI）</h2>
+            
+            <p>使用以下方法之一（全部支持）：</p>
+            
+            <ul>
+                <li>向导（推荐）：<code>openclaw onboard --install-daemon</code></li>
+                <li>直接安装：<code>openclaw gateway install</code></li>
+                <li>配置流程：<code>openclaw configure</code> → 选择 <strong>网关服务</strong></li>
+                <li>修复/迁移：<code>openclaw doctor</code>（提供安装或修复服务的选项）</li>
+            </ul>
+            
+            <p>服务目标取决于操作系统：</p>
+            
+            <ul>
+                <li>macOS：LaunchAgent</li>
+                <li>Linux：systemd</li>
+                <li>Windows：Windows 服务</li>
+            </ul>
+            
+            <div class="tip">
+                <p><strong>提示</strong></p>
+                <p>平台选择建议：</p>
+                <ol>
+                    <li><strong>开发环境</strong>：使用 macOS 或 Linux</li>
+                    <li><strong>生产环境</strong>：使用 VPS 或云托管</li>
+                    <li><strong>移动使用</strong>：使用 iOS/Android 配套应用</li>
+                    <li><strong>Windows 用户</strong>：使用 WSL2 运行网关</li>
+                </ol>
             </div>
             
-            <div class="copyright">
-                <p>© 2026 OpenClaw 中文文档. 基于 <a href="https://openclaw.ai" target="_blank">OpenClaw 官网</a> 创建.</p>
-                <p>翻译和维护：智慧者 | 托管于 GitHub Pages</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // 导航栏激活
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a');
+            <h2>平台兼容性</h2>
             
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http')) {
-                    if (currentPath === href || 
-                        (href === '/openclaw-chinese/platforms/' && currentPath.includes('/platforms'))) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>网关支持</th>
+                        <th>配套应用</th>
+                        <th>推荐程度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>macOS</td>
+                        <td>✅ 完全支持</td>
+                        <td>✅ 菜单栏应用</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Linux</td>
+                        <td>✅ 完全支持</td>
+                        <td>⏳ 规划中</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Windows</td>
+                        <td>✅ 完全支持</td>
+                        <td>⏳ 规划中</td>
+                        <td>⭐⭐⭐（建议 WSL2）</td>
+                    </tr>
+                    <tr>
+                        <td>iOS</td>
+                        <td>✅ 通过配套应用</td>
+                        <td>✅ App Store</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Android</td>
+                        <td>✅ 通过配套应用</td>
+                        <td>✅ Google Play</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>需要帮助？</h2>
+            <ul>
+                <li>查看具体的平台安装指南</li>
+                <li>访问 <a href="/openclaw-chinese/help/">帮助中心</a></li>
+                <li>加入 <a href="https://discord.com/invite/clawd" target="_blank
