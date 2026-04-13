@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试布局 - OpenClaw 快速开始</title>
+    <style>
+        /* Mintlify 通用布局样式 */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --sidebar-width: 280px;
+            --toc-width: 240px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: white;
+        }
+        
+        /* 主容器 */
+        .mintlify-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 左侧导航 */
+        .sidebar-left {
+            width: var(--sidebar-width);
+            background: var(--light-color);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar-nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        
+        .sidebar-nav a:hover {
+            background: var(--border-color);
+        }
+        
+        .sidebar-nav a.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* 主要内容区域 */
+        .content-wrapper {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            margin-right: var(--toc-width);
+            padding: 40px 60px;
+            max-width: 900px;
+        }
+        
+        .content {
+            line-height: 1.8;
+        }
+        
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .content h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--dark-color);
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 右侧目录 */
+        .toc-right {
+            width: var(--toc-width);
+            background: var(--light-color);
+            border-left: 1px solid var(--border-color);
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .toc-nav {
+            list-style: none;
+        }
+        
+        .toc-nav li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .toc-nav a {
+            color: var(--gray-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .toc-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 1200px) {
+            .toc-right {
+                display: none;
+            }
+            
+            .content-wrapper {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-left {
+                display: none;
+            }
+            
+            .content-wrapper {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mintlify-container">
+        <!-- 左侧导航 -->
+        <aside class="sidebar-left">
+            <h3>文档导航</h3>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active">快速开始</a></li>
+                <li><a href="#">安装</a></li>
+                <li><a href="#">网关与运维</a></li>
+                <li><a href="#">消息渠道</a></li>
+                <li><a href="#">平台</a></li>
+                <li><a href="#">工具</a></li>
+                <li><a href="#">模型</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">社区</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+        </aside>
+        
+        <!-- 主要内容 -->
+        <div class="content-wrapper">
+            <main class="content">
+                <h1>快速开始</h1>
+                <p>安装 OpenClaw，运行 onboarding，并与您的 AI 助手聊天 — 全部大约需要 5 分钟。最后，您将拥有一个运行的网关、配置的身份验证和一个正常工作的聊天会话。</p>
+                
+                <h2>您需要什么</h2>
+                <p><strong>Node.js</strong> — 推荐 Node 24（也支持 Node 22.14+）</p>
+                <p><strong>模型提供商的 API 密钥</strong>（Anthropic、OpenAI、Google 等）— onboarding 将提示您</p>
+                
+                <h2>快速设置</h2>
+                <p>安装 OpenClaw、运行 onboarding 等步骤...</p>
+                
+                <h2>下一步做什么</h2>
+                <p>连接渠道、配置网关等...</p>
+            </main>
+        </div>
+        
+        <!-- 右侧目录 -->
+        <aside class="toc-right">
+            <h4>本页目录</h4>
+            <ul class="toc-nav">
+                <li><a href="#您需要什么">您需要什么</a></li>
+                <li><a href="#快速设置">快速设置</a></li>
+                <li><a href="#下一步做什么">下一步做什么</a></li>
+            </ul>
+        </aside>
+    </div>
+    
+    <script>
+        // 简单的目录高亮
+        document.addEventListener('DOMContentLoaded', function() {
+            const tocLinks = document.querySelectorAll('.toc-nav a');
+            const sections = document.querySelectorAll('.content h2');
+            
+            // 简化版本：实际应该根据滚动位置高亮
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
