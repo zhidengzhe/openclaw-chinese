@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试布局（修正）- OpenClaw</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --sidebar-width: 280px;
+            --toc-width: 240px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: white;
+        }
+        
+        /* 网站顶部导航栏（我们已经有的） */
+        .site-navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .site-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .site-nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        
+        .site-nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 页面内容区域 */
+        .page-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* 左侧：本页章节目录 */
+        .page-sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            padding-right: 40px;
+            position: sticky;
+            top: 90px; /* 70px导航栏 + 20px间距 */
+            align-self: flex-start;
+            max-height: calc(100vh - 90px);
+            overflow-y: auto;
+        }
+        
+        .page-toc {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .page-toc h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .page-toc ul {
+            list-style: none;
+        }
+        
+        .page-toc li {
+            margin-bottom: 8px;
+        }
+        
+        .page-toc a {
+            color: var(--gray-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .page-toc a:hover {
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.1);
+        }
+        
+        /* 中间：主要内容 */
+        .page-content {
+            flex: 1;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+        
+        .page-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .page-content h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--dark-color);
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .page-content h3 {
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+        }
+        
+        .page-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        /* 右侧：可能空白或其他 */
+        .page-right {
+            width: var(--toc-width);
+            flex-shrink: 0;
+            padding-left: 40px;
+        }
+        
+        .right-placeholder {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 1200px) {
+            .page-right {
+                display: none;
+            }
+            
+            .page-container {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .page-sidebar {
+                display: none;
+            }
+            
+            .page-content {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 网站顶部导航栏（12项导航） -->
+    <nav class="site-navbar">
+        <div class="logo">OpenClaw 中文</div>
+        <ul class="site-nav-links">
+            <li><a href="#">首页</a></li>
+            <li><a href="#" class="active">快速开始</a></li>
+            <li><a href="#">安装</a></li>
+            <li><a href="#">网关与运维</a></li>
+            <li><a href="#">消息渠道</a></li>
+            <li><a href="#">平台</a></li>
+            <li><a href="#">工具</a></li>
+            <li><a href="#">模型</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">社区</a></li>
+            <li><a href="#">帮助</a></li>
+            <li><a href="#">GitHub</a></li>
+        </ul>
+    </nav>
+    
+    <!-- 页面内容区域 -->
+    <div class="page-container">
+        <!-- 左侧：本页章节目录 -->
+        <aside class="page-sidebar">
+            <div class="page-toc">
+                <h3>本页目录</h3>
+                <ul>
+                    <li><a href="#getting-started">快速开始</a></li>
+                    <li><a href="#what-you-need">您需要什么</a></li>
+                    <li><a href="#quick-setup">快速设置</a></li>
+                    <li><a href="#install-openclaw">安装 OpenClaw</a></li>
+                    <li><a href="#run-onboarding">运行 onboarding</a></li>
+                    <li><a href="#verify-gateway">验证网关运行状态</a></li>
+                    <li><a href="#open-dashboard">打开控制面板</a></li>
+                    <li><a href="#send-first-message">发送第一条消息</a></li>
+                    <li><a href="#advanced-control-ui">高级：挂载自定义控制UI</a></li>
+                    <li><a href="#what-to-do-next">下一步做什么</a></li>
+                    <li><a href="#advanced-env-vars">高级：环境变量</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- 中间：主要内容 -->
+        <main class="page-content">
+            <h1 id="getting-started">快速开始</h1>
+            <p>安装 OpenClaw，运行 onboarding，并与您的 AI 助手聊天 — 全部大约需要 5 分钟。最后，您将拥有一个运行的网关、配置的身份验证和一个正常工作的聊天会话。</p>
+            
+            <h2 id="what-you-need">您需要什么</h2>
+            <p><strong>Node.js</strong> — 推荐 Node 24（也支持 Node 22.14+）</p>
+            <p><strong>模型提供商的 API 密钥</strong>（Anthropic、OpenAI、Google 等）— onboarding 将提示您</p>
+            
+            <h2 id="quick-setup">快速设置</h2>
+            
+            <h3 id="install-openclaw">安装 OpenClaw</h3>
+            <p>macOS / Linux: <code>curl -fsSL https://openclaw.ai/install.sh | bash</code></p>
+            <p>Windows (PowerShell): <code>iwr -useb https://openclaw.ai/install.ps1 | iex</code></p>
+            
+            <h3 id="run-onboarding">运行 onboarding</h3>
+            <p><code>openclaw onboard --install-daemon</code></p>
+            <p>向导将引导您选择模型提供商、设置 API 密钥和配置网关。大约需要 2 分钟。</p>
+            
+            <h3 id="verify-gateway">验证网关运行状态</h3>
+            <p><code>openclaw gateway status</code></p>
+            <p>您应该看到网关在端口 18789 上监听。</p>
+            
+            <h3 id="open-dashboard">打开控制面板</h3>
+            <p><code>openclaw dashboard</code></p>
+            <p>这将在浏览器中打开控制 UI。如果加载成功，说明一切正常。</p>
+            
+            <h3 id="send-first-message">发送第一条消息</h3>
+            <p>在控制 UI 聊天中输入消息，您应该会收到 AI 回复。</p>
+            
+            <h2 id="advanced-control-ui">高级：挂载自定义控制UI</h2>
+            <p>如果您维护本地化或自定义的控制面板构建...</p>
+            
+            <h2 id="what-to-do-next">下一步做什么</h2>
+            <p>连接渠道、配置网关等...</p>
+            
+            <h2 id="advanced-env-vars">高级：环境变量</h2>
+            <p>如果您以服务账户运行 OpenClaw 或需要自定义路径...</p>
+        </main>
+        
+        <!-- 右侧：可能空白或其他 -->
+        <aside class="page-right">
+            <div class="right-placeholder">
+                <p>右侧区域</p>
+                <p>官网此位置可能是空白或包含其他导航元素</p>
+            </div>
+        </aside>
+    </div>
+    
+    <script>
+        // 简单的目录高亮
+        document.addEventListener('DOMContentLoaded', function() {
+            const tocLinks = document.querySelectorAll('.page-toc a');
+            
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
