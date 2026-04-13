@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试布局（根目录）- OpenClaw</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --sidebar-width: 280px;
+            --toc-width: 240px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: white;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .status {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .links {
+            margin: 20px 0;
+        }
+        
+        .links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .layout-preview {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .toc {
+            width: 180px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>布局测试页面（根目录）</h1>
+        
+        <div class="status">
+            <p><strong>测试目的：</strong>验证Mintlify三栏布局结构</p>
+            <p><strong>部署状态：</strong>此页面在根目录，应该可以直接访问</p>
+            <p><strong>对比官网：</strong>https://docs.openclaw.ai/getting-started</p>
+        </div>
+        
+        <div class="links">
+            <a href="https://zhidengzhe.github.io/openclaw-chinese/getting-started/test-layout.html" target="_blank">测试页面1（子目录）</a>
+            <a href="https://zhidengzhe.github.io/openclaw-chinese/test-layout-root.html" target="_blank">测试页面2（根目录）</a>
+            <a href="https://docs.openclaw.ai/getting-started" target="_blank">官网对比</a>
+            <a href="https://github.com/zhidengzhe/openclaw-chinese" target="_blank">GitHub仓库</a>
+        </div>
+        
+        <h2>布局预览</h2>
+        <div class="layout-preview">
+            <div class="sidebar">
+                <h3>左侧导航</h3>
+                <ul>
+                    <li>快速开始</li>
+                    <li>安装</li>
+                    <li>网关与运维</li>
+                    <li>消息渠道</li>
+                </ul>
+            </div>
+            
+            <div class="content">
+                <h3>主要内容</h3>
+                <p>这是主要内容区域，对应官网的文档内容部分。</p>
+                <p>采用三栏布局：左侧导航 + 中间内容 + 右侧目录。</p>
+            </div>
+            
+            <div class="toc">
+                <h3>右侧目录</h3>
+                <ul>
+                    <li>章节1</li>
+                    <li>章节2</li>
+                    <li>章节3</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="status">
+            <p><strong>请反馈：</strong></p>
+            <ol>
+                <li>这个页面能正常访问吗？</li>
+                <li>布局结构与官网相似度如何？</li>
+                <li>需要调整哪些地方？</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
